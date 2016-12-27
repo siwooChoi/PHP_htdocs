@@ -1,0 +1,77 @@
+<form action="./controlor/controlSupport.php?mode=noSearch" method="post">
+  <table class='main_product'  width="850px" height="700px" style="margin-left:10px; margin-top:20px;">
+
+<!-- border="1px white solid" -->
+  <!-- <table> -->
+    <?php
+    // $_SESSION["p_Name_$i"]
+    // $_SESSION["p_Price_$i"]
+    // $_SESSION["p_Comment_$i"]
+    // $_SESSION["p_Type_$i"]
+    // $_SESSION["p_Amount_$i"]
+    // $_SESSION["p_Imgname_$i"]
+
+      if(isset($_SESSION['rowCount'])){
+        $productCount = 1;
+
+        for($i = 0 ; $i<$_SESSION['rowCount']; $i++){
+          if($i % 3 == 0){
+            echo "<tr>";
+          }
+
+          ?>
+      
+          <td width=33%>  <!-- 각각의 큰 틀 -->
+            <p style='text-align:center'><?php  echo $_SESSION["p_Name_{$i}"] ?></p>  <!-- 메인 상품명 -->
+
+              <table border="solid black 1px" style="" >
+                <tr>
+                  <td>
+                      <a href='./index.php?product=<?php echo $_SESSION["p_Imgname_{$i}"]; ?>'>
+                        <img width="200px" height="200px" src="./imgs/<?php echo $_SESSION["p_Imgname_$i"];?>" >
+                      </a>
+                  </td>
+
+                  <td style="text-align:center" width="70%">
+                    <?php echo $_SESSION["p_Comment_$i"];?>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align:center">
+                    판매가격 : <?php echo $_SESSION["p_Price_$i"]; ?> <br>
+                    남은 수량 : <?php echo $_SESSION["p_Amount_$i"]; ?>
+                  </td>
+                  <td>
+                    <table border='1px solid black' >
+                      <tr><td>
+                    <form action="basket">
+                      <input type="submit" value="장바구니">
+                    </form>
+                  </td>
+
+                  <td>
+                    <form>
+                      <input type="submit" value="구매하기">
+                    </form>
+                  </td>
+                  </td>
+                </tr>
+              </table>
+
+              </table>
+          </td>
+          </td>
+
+          <?php
+          if($productCount % 3 == 0){
+            echo "</tr>";
+          }
+          $productCount++;
+        }//for end
+        echo "</table>";
+
+        } else{
+
+        }
+    ?>
+</form>
