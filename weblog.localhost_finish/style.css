@@ -1,0 +1,91 @@
+/* body Element (페이지 전체)에 적용할 CSS */
+body{
+    margin: 0;
+    padding: 0;
+      /* font-family: ナイリオ, Osaka;*/
+    font-family: helvetica, 'MS PGothic', Osaka, "Malgun Gothic", gulim;
+    color: #000000;
+    background-color: #f0f8ff;
+}
+
+/* h2, h3 Element에 적용*/
+h2, h3{
+  font-size: 1.0em;
+}
+/* a Element(링크)에 적용*/
+a {
+  color: #3399cc;
+}
+/* ID Selector #header에 적용*/
+#header{
+  margin: 0;
+  padding: 0px;
+  border-top: 2px solid #ff0000;
+  border-bottom: 2px solid #ff0000;
+}
+
+/* ID Selector #header Element에 포함된 h1 Element에 적용*/
+#header h1{
+  font-size: 1.4em;
+  font-family: Times New Romman, Osaka;
+  margin: 5px 100px;
+}
+/* ID Selector #header Element에 포함된 h1->a Element에 적용*/
+#header h1 a{
+  color: #ff0000;
+  text-decoration: none;
+}
+/* ID Selecter #header Element에 포함된 h1->a Element에 mouseover되면 적용*/
+#header h1 a:hover{
+  color: #ff6600;
+}
+
+/* ID Selector #nav(네비게이션) Element에 적용*/
+#nav{
+  margin: 0 100px;
+}
+
+/* ID Selector #main(메인 컨텐츠) Element에 적용*/
+#main{
+  margin: 0 100px;
+}
+
+/*Class Selector status로 지정되어있는 Element에 적용*/
+.status{
+  padding: 10px;
+  border: 2px solid #cccccc;
+  margin-bottom: 10px;
+  background-color: #ffffff
+}
+
+/* Class Selector error_list로 지정되어있는 ul Element에 적용*/
+ul.error_list{
+  border: 1px solid #ff0000;
+  background-color: #ffcccc;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+/* Class Selector error_list로 지정되어 있는 ul Element에 포함되어 있는 li Element에 적용*/
+ul.error_list li{
+  color: #ff0000;
+}
+
+/* Class Selector account로 지정되어 있는 Element에 적용*/
+.account{
+  float:left;
+  background-color: #ffcccc;
+  padding: 0px 30px 10px 30px;
+  margin-left: 60px;
+  width: 200px;
+}
+
+/* Class Selector f_user로 지정되어 있는 Element에 적용*/
+.f_user{
+  float:left;
+  background-color: #ffcccc;
+  padding: 0px 30px 10px 30px;
+  margin-left: 60px;
+  width: 200px;
+}
