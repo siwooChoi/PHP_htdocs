@@ -74,7 +74,7 @@ abstract class AppBase{//계승을 전제로 하는 클래스로 abstract클래�
       $parameters = $this->_router->getRouteParams($this->_request->getPath());
 
       if($parameters === false){
-        throw new FileNotFoundException('NO ROUTE'.$this->_request->getPath())''
+        throw new FileNotFoundException('NO ROUTE'.$this->_request->getPath());
       }
 
       $controller = $parameters['controller'];
@@ -168,7 +168,7 @@ abstract class AppBase{//계승을 전제로 하는 클래스로 abstract클래�
   }
 
   // ***getSessionObject() ***
-  public function getResponseObject(){
+  public function getSessionObject(){
     return $this->_session;
   }
 

@@ -1,7 +1,7 @@
 <?php
   class Loader{
-    protected $_directeoies = array();
-
+    protected $_directories = array();
+        
     public function regDirectory($dir) {
       $this->_directories[] = $dir;
     }
@@ -21,5 +21,5 @@
       }
     }
   }
-  
+
  ?>

@@ -1,12 +1,12 @@
 <?php
 
 	class View{
-		protected $_bashURL; //view 파일의 폴더 경로 정보
+		protected $_baseUrl; //view 파일의 폴더 경로 정보
 		protected $_initialValue; // 컨트롤러 render()에서의 전달정보 (리퀘스트,리퀘스트의 Base URL, Session)
 		protected $_passValues = array(); // View에 전달할 정보
 
-		public function __construct($bashUrl,$initialValue=array()){
-			$this->_bashURL = $bashUrl;
+		public function __construct($baseUrl,$initialValue=array()){
+			$this->_baseUrl = $baseUrl;
 			$this->_initialValue = $initialValue;
 		}
 
@@ -18,7 +18,7 @@
 		//뷰파일을 읽어 들이는 메서드
 		//뷰파일명,뷰파일에전달하는정보(액션메서드로부터 전달받은),레이아웃 페이지
 		public function render($filename,$parameters=array(),$template=false){
-			$view = $this->_bashURL.'/'.$filename.'.php';
+			$view = $this->_baseUrl.'/'.$filename.'.php';
 			extract(array_merge($this->_initialValue,$parameters));//뷰파일 디렉토리 경로+리퀘스트객체+세션객체,액션메서드로부터 받은 배열 정보
 			//http://php.net/manual/kr/function.array-merge.php
 			//array_merge($arr1,$arr2),$arr1과 $arr2를 병합하여 배열반환(같은 키는 $arr2 우선)

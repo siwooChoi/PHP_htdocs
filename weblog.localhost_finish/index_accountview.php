@@ -19,9 +19,9 @@
  </div>
  <div class="f user">
    <h3>Follow하고 있는 사용자</h3>
-   <?php if(count($followingUsers)>0); ?>
+   <?php if(count($followingUsers)>0): ?>
      <ul>
-       <?php foreach ($followingUsers as $f_user); ?>
+       <?php foreach ($followingUsers as $f_user): ?>
        <li>
          <a href="<?php print $base_url; ?>/user/<?php print $this->escape($f_user['user_name']); ?>">
          </a>
