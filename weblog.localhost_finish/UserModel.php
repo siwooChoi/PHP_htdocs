@@ -1,4 +1,4 @@
-<? php
+<?php
 class UserModel extends ExecuteModel {
   // **insert()***
   //http://php.net/manual/kr/function.password-hash.php
@@ -10,7 +10,7 @@ class UserModel extends ExecuteModel {
     $now = new DateTime();
     $sql = "INSERT INTO user(user_name, password, time_stamp)
     VALUES(:user_name, :password, :time_stamp)";
-    $stmt = $thos ->execute($sql, array)(
+    $stmt = $this->execute($sql, array())(
       ':user_name' => $user_name,
       ':password' => $password,
       ':time_stamp' => $now->format('Y-m-d H:i:s'),

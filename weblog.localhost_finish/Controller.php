@@ -23,11 +23,11 @@
     }
 
     //***dispatch()***
-    public function dispatch($action,params = array()){
+    public function dispatch($action, $params = array()){
       //$action : 액션명
       //$params : Routing정보
       $this->_action = $action; //액션명을 현재 컨트롤러의 프로퍼티 $_action에 저장
-      $action_method=$action.self::ACTION; //액션 메소드 저장:액션명 + action
+      $action_method = $action.self::ACTION; //액션 메소드 저장:액션명 + action
 
       if(!method_exists($this, $action_method)){ //액션메소드가 존재하지 않으면 에러화면
         //http://php.net/manual/kr/function.metod-exists.php
@@ -39,7 +39,7 @@
         throw new AuthorizedException(); //AuthorizedException 예외 발생
 
       }
-      $content = $this->$action_mothod($params); //액션 메소드를 실행하여 컨텐츠를 App클래스의 getcontent로 반환
+      $content = $action_mothod($params); //액션 메소드를 실행하여 컨텐츠를 App클래스의 getcontent로 반환
       return $content;
 
     }
@@ -81,7 +81,7 @@
       if(is_null($template)){
         $template = 'template';
       }
-      $path = $this ->_controller.'/'.$viewFile //뷰파일의 경로 정보
+      $path = $this ->_controller.'/'.$viewFile; //뷰파일의 경로 정보
       $contents = $view -> render($path,
                                   $param,
                                   $template); //view 클래스의 render()
@@ -101,9 +101,11 @@
     }
     //***getToken(): CSRF를 위한 one time Password 생성 ***
     //CSRF : Cross-site Request Forgery, XSS를 이용한 요청 위조
-    //Action method 에서 render()호추시 파라메타 전달을 위해 실행
+    //Action method 에서 render()호출 시 파라메타 전달을 위해 실행
     protected function getToken($form){
       $key = 'token/'.$form; //$_SESSION변수에서 token을 읽어옴
+      $tokens = $this->_session->get($key, array());
+
       if(count($tokens)>=10){ //토큰의 수가 10개를 넘지 않도록 조절
         array_shift($tokens);
         //http://php.net/manual/kr/function.array-shift.php

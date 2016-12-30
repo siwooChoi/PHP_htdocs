@@ -1,4 +1,4 @@
-<?php 
+<?php
 //추상클래스
 	abstract class ExecuteModel{
 		//http://php.net/manual/kr/book.pdo.php
@@ -6,7 +6,7 @@
 		protected $_pdo;
 
 		// ***Constructor***
-		public function __construct(){
+		public function __construct($pdo){
 			//ConnectionModel 클래스 get()내 $obj = new $mdl_class($cnt); 코드에서 실행
 			$this->setPdo($pdo);
 		}

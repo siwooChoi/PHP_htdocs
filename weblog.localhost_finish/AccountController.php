@@ -20,7 +20,7 @@ class AccountController extends Controller{
   }
   public function registerAction(){//signup.php내의 form태그 action에서의 설정
     //1>POST 전송박식으로 전달 받은 데이터에 대한 체크
-    if(!thid->_request->ispost()){
+    if(!$this->_request->ispost()){
       $this->httpNotFound(); //FileNotFoundException 예외객체를 생성
     }
     if($this->_session->isAuthenticated()){
@@ -158,7 +158,7 @@ class AccountController extends Controller{
       }
       $token = $this ->_request->getPost('_token');
 
-      if(!this->checkToken(self::FOLLOW,$token)){
+      if(!$this->checkToken(self::FOLLOW,$token)){
         return $this->redirect('/user/'.$follow_user_name);
       }
       $follow_user = $this->_connect_model->get('User')->getUserRecord($follow_user_name);
