@@ -30,9 +30,9 @@ class ConnectModel{
   //***getConnection()***
   public function getConnection($name =null){
     //접속명이 null인 경우 처리
-    //http://php.net/manual/kr/function.current.php
+    // http://php.net/manual/kr/function.current.php
     if(is_null($name)){
-      //_dbConnections프로퍼티의 제일 첫요소를 반환
+      //_dbConnections프로퍼티의 제일 첫요소를 반환  <-- current
       return current($this->_dbConnections);
     }
     //_dbConnections 프로퍼티에 저장되어있는 key가 $name으로 되어있는 PDO객체를 반환

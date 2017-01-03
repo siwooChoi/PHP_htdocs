@@ -36,7 +36,7 @@
 
 		// ***getRecord()***
 		public function getRecord($sql,$parameter = array()){
-			$rec = $this->execute($sql,$parameter)->fetchAll(PDO::FETCH_ASSOC);
+			$rec = $this->execute($sql,$parameter)->fetch(PDO::FETCH_ASSOC);
 			return $rec;
 		}
 	}
