@@ -11,10 +11,14 @@ class BlogApp extends AppBase {
       'user'      => 'root',                                            //DB사용자명
       'password'  => '0000'                                             //DB사용자의 패스워드
     ));
+
   }//doDbConnection - function
+
+
 
   //Root Directory 경로를 반환
   public function getRootDirectory() {
+
     return dirname(__FILE__); //BlogApp.php가 저장되어 있는 디렉토리
     //http://php.net/menual/en/function.dirname.php
   }//getRootDirectory - function
@@ -52,5 +56,14 @@ class BlogApp extends AppBase {
   }//getRouteDefinition - function
 
 }//BlogApp -class
+
+    // ※ 디버깅 코드 실행해보기.
+  //  var_dump(getRouteDefinition());
+  //      ex )
+  //  '/' => array('controller' => 'blog', 'action' => 'index')
+  //  [/] =>Array(
+  //        [controller]=>blog            : BlogController
+  //        [action]=>index               : IndexAction()
+  //       )
 
  ?>

@@ -70,6 +70,7 @@ public function routeConverter($routedef){
   $converted = array();
   foreach ($routedef as $url => $par){
     $converts = explode('/', ltrim($url,'/'));
+    // ltrim : (왼쪽으로) 문자열의 시작의 공백 (또는 지정한 문자) 을 제거
     foreach($converts as $i => $convert){
       if(0 ===strpos($convert, ':')){
         $bar = substr($convert,1);
@@ -78,6 +79,7 @@ public function routeConverter($routedef){
       $converts[$i] = $convert;
     }
     $pattern = '/'.implode('/',$converts);
+    // implode : 배열원소를 문자열로 결합.  explode의 반대 인듯 하다.
     $converted[$pattern]=$par;
   }
   return $converted;

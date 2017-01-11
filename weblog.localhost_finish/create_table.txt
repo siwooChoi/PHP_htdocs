@@ -1,3 +1,4 @@
+
 CREATE TABLE user(
   id INTEGER AUTO_INCREMENT,
   user_name VARCHAR(20) NOT NULL,
@@ -13,8 +14,10 @@ CREATE TABLE status(
   message VARCHAR(255),
   time_stamp DATETIME,
   PRIMARY KEY(id),
-  INDEX user id_index(user_id)
+  INDEX user_id_index(user_id)
 ) ENGINE = INNODB;
+
+
 
 CREATE TABLE followingUser(
   user_id INTEGER,

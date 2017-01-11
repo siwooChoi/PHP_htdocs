@@ -7,16 +7,16 @@ class UserModel extends ExecuteModel {
   //DateTime::format
   public function insert($user_name, $password) {
     $password = password_hash($password, PASSWORD_DEFAULT);
+    // password_hash() : _문자열을 암호화_ 와 password_verify() : _암호화된 패스워드를 다시 정상으로_는 쌍으로 사용한다.  
     $now = new DateTime();
     $sql = "INSERT INTO user(user_name, password, time_stamp)
     VALUES(:user_name, :password, :time_stamp)";
-    $stmt = $this->execute($sql, array())(
+    $stmt = $this->execute($sql, array())(  // execute(); 추상 클래스 ExecuteModel의 메소드
       ':user_name' => $user_name,
       ':password' => $password,
       ':time_stamp' => $now->format('Y-m-d H:i:s'),
     ));
 
-    // execute(); 추상 클래스 ExecuteModel의 메소드
   }
 
   // ***getUserRecord() ***

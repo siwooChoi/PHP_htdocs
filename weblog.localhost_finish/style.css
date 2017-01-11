@@ -1,22 +1,22 @@
-/* body Element (ÆäÀÌÁö ÀüÃ¼)¿¡ Àû¿ëÇÒ CSS */
+/* body Element (í˜ì´ì§€ ì „ì²´)ì— ì ìš©í•  CSS */
 body{
     margin: 0;
     padding: 0;
-      /* font-family: «Ê«¤«ê«ª, Osaka;*/
+      /* font-family: ãƒ¡ã‚¤ãƒªã‚ª, Osaka;*/
     font-family: helvetica, 'MS PGothic', Osaka, "Malgun Gothic", gulim;
     color: #000000;
     background-color: #f0f8ff;
 }
 
-/* h2, h3 Element¿¡ Àû¿ë*/
+/* h2, h3 Elementì— ì ìš©*/
 h2, h3{
   font-size: 1.0em;
 }
-/* a Element(¸µÅ©)¿¡ Àû¿ë*/
+/* a Element(ë§í¬)ì— ì ìš©*/
 a {
   color: #3399cc;
 }
-/* ID Selector #header¿¡ Àû¿ë*/
+/* ID Selector #headerì— ì ìš©*/
 #header{
   margin: 0;
   padding: 0px;
@@ -24,33 +24,33 @@ a {
   border-bottom: 2px solid #ff0000;
 }
 
-/* ID Selector #header Element¿¡ Æ÷ÇÔµÈ h1 Element¿¡ Àû¿ë*/
+/* ID Selector #header Elementì— í¬í•¨ëœ h1 Elementì— ì ìš©*/
 #header h1{
   font-size: 1.4em;
   font-family: Times New Romman, Osaka;
   margin: 5px 100px;
 }
-/* ID Selector #header Element¿¡ Æ÷ÇÔµÈ h1->a Element¿¡ Àû¿ë*/
+/* ID Selector #header Elementì— í¬í•¨ëœ h1->a Elementì— ì ìš©*/
 #header h1 a{
   color: #ff0000;
   text-decoration: none;
 }
-/* ID Selecter #header Element¿¡ Æ÷ÇÔµÈ h1->a Element¿¡ mouseoverµÇ¸é Àû¿ë*/
+/* ID Selecter #header Elementì— í¬í•¨ëœ h1->a Elementì— mouseoverë˜ë©´ ì ìš©*/
 #header h1 a:hover{
   color: #ff6600;
 }
 
-/* ID Selector #nav(³×ºñ°ÔÀÌ¼Ç) Element¿¡ Àû¿ë*/
+/* ID Selector #nav(ï¿½×ºï¿½ï¿½ï¿½ï¿½Ì¼ï¿½) Elementì— ì ìš©*/
 #nav{
   margin: 0 100px;
 }
 
-/* ID Selector #main(¸ŞÀÎ ÄÁÅÙÃ÷) Element¿¡ Àû¿ë*/
+/* ID Selector #main(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) Elementì— ì ìš©*/
 #main{
   margin: 0 100px;
 }
 
-/*Class Selector status·Î ÁöÁ¤µÇ¾îÀÖ´Â Element¿¡ Àû¿ë*/
+/*Class Selector statusë¡œ ì§€ì •ë˜ì–´ ìˆëŠ” Elementì— ì ìš©*/
 .status{
   padding: 10px;
   border: 2px solid #cccccc;
@@ -58,7 +58,7 @@ a {
   background-color: #ffffff
 }
 
-/* Class Selector error_list·Î ÁöÁ¤µÇ¾îÀÖ´Â ul Element¿¡ Àû¿ë*/
+/* Class Selector error_listë¡œ ì§€ì •ë˜ì–´ ìˆëŠ” ul Elementì ìš©*/
 ul.error_list{
   border: 1px solid #ff0000;
   background-color: #ffcccc;
@@ -67,12 +67,12 @@ ul.error_list{
 
 }
 
-/* Class Selector error_list·Î ÁöÁ¤µÇ¾î ÀÖ´Â ul Element¿¡ Æ÷ÇÔµÇ¾î ÀÖ´Â li Element¿¡ Àû¿ë*/
+/* Class Selector error_listë¡œ ì§€ì •ë˜ì–´ ìˆëŠ” ul Elementì— í¬í•¨ë˜ì–´ ìˆëŠ” li Elementì ìš©*/
 ul.error_list li{
   color: #ff0000;
 }
 
-/* Class Selector account·Î ÁöÁ¤µÇ¾î ÀÖ´Â Element¿¡ Àû¿ë*/
+/* Class Selector accountë¡œ ì§€ì •ë˜ì–´ ìˆëŠ” Elementì— ì ìš©*/
 .account{
   float:left;
   background-color: #ffcccc;
@@ -81,7 +81,7 @@ ul.error_list li{
   width: 200px;
 }
 
-/* Class Selector f_user·Î ÁöÁ¤µÇ¾î ÀÖ´Â Element¿¡ Àû¿ë*/
+/* Class Selector f_userë¡œ ì§€ì •ë˜ì–´ ìˆëŠ”  Elementì— ì ìš©*/
 .f_user{
   float:left;
   background-color: #ffcccc;

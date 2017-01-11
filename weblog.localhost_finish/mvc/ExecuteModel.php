@@ -23,7 +23,7 @@
 					$sql,
 					array(PDO::ATTR_CURSOR=>PDO::CURSOR_SCROLL));
 			//Prepared Statement의 실행
-			$stmt->execute($parameter);
+			$stmt->execute($parameter);		// PDO객체의 execute();
 			//실행 결과를 PDOStatement 객체로 반환
 			return $stmt;
 		}
@@ -33,6 +33,7 @@
 			$all_rec = $this->execute($sql,$parameter)->fetchAll(PDO::FETCH_ASSOC);
 			return $all_rec;
 		}
+
 
 		// ***getRecord()***
 		public function getRecord($sql,$parameter = array()){

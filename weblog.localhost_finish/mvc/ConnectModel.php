@@ -23,7 +23,7 @@ class ConnectModel{
       exit("데이터 베이스 연결을 실패했습니다.:{$e->getMessage()}");
     }
     //ATTR_ERRMODE-예외를 던질수 있도록 설정:ERRMODE_EXCEPTION-예외 레포트에 관한 설정
-    $cnt->setAttribute(PDO::ATTR_ERRMODE< PDO::ERRMODE_EXCEPTION);
+    $cnt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $this->_dbConnections[$name]=$cnt;
     $this->_connectName=$name;
   }

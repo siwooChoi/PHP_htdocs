@@ -60,7 +60,7 @@
     return false;
     }
     //***render()***
-    //컨트롤러 서브 클래스의 액션메소드 (OOAction())에서 호출
+    //컨트롤러 서브 클래스의 액션메소드 ( ~~~Action())에서 호출
     protected function render(
       $param = array(),$viewFile = null, $template = null
     ){//$param : 템플릿에 전달하는 변수 (연상배열)

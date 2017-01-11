@@ -1,7 +1,9 @@
-<?php 
+<?php
 class Response {
 	protected 	$_content;					//컨텐츠를 저장하는 프로파티
 	protected 	$_statusCode 	= 200;		//상태코드 저장
+	// statusCode를 검색하면 나온다. 200번대가 정상,   404 file notfound  ,  400번대가 서버의문제
+	//														500번대는 서버에 어떤 문제가 있음
 	protected 	$_statusMsg		= 'OK';		//상태메시지 저장
 	protected 	$_headers 		= array();	//응답헤더의 필드를 저장
 	const 		HTTP 			= 'HTTP/1.1';
@@ -9,7 +11,7 @@ class Response {
 	// status code, status message를 지정
 	public function setStatusCode($code, $msg = '') {
 		$this->_statusCode 	= $code; 	//상태코드를 저장시킴
-		$this->_statusMsg 	= $msg;		//상태메시지를 저장시킴	
+		$this->_statusMsg 	= $msg;		//상태메시지를 저장시킴
 	}
 
 	// response header 설정

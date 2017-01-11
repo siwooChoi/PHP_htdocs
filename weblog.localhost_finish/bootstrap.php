@@ -1,5 +1,5 @@
 <?php
-  require 'mvc/Loader.php';
+  require 'mvc/Loader.php'; 
 
   $loader = new Loader();
   $loader->regDirectory(dirname(__FILE__).'/mvc');

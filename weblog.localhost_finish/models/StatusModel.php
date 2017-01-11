@@ -1,7 +1,7 @@
-<?php 
+<?php
 class StatusModel extends ExecuteModel {
   public function insert($user_id, $message){
-    $now = new DateTime(); //ÇöÀçÀÇ ÀÏ½Ã
+    $now = new DateTime(); // ê¸€ìž ê¹¨ì§„ ì£¼ì„.
 
     $sql = "INSERT INTO status(user_id, message, time_stamp)
             VALUES(:user_id, :message, :time_stamp)";
@@ -10,14 +10,14 @@ class StatusModel extends ExecuteModel {
     array(':user_id' => $user_id,
           ':message' => $message,
           ':time_stamp' => $now->format('Y-m-d H:i:s'),
-        ));              
+        ));
   }
   // *** getUserData()***
   public function getUserData($user_id){
     $sql = "SELECT a.*, u.user_name
               FROM status a LEFT JOIN user u ON a.user_id = u.id
                   LEFT JOIN followingUser f ON f.following_id = a.user_id
-                     AND f.user_id =:user_id  
+                     AND f.user_id =:user_id
               WHERE f.user_id =: user_id OR u.id =: user_id
               ORDER BY a.time_stamp DESC";
           $user = $this->getAllRecord($sql,array(':user_id'=>$user_id));
@@ -42,7 +42,7 @@ class StatusModel extends ExecuteModel {
              WHERE a.id = :id AND u.user_name = :user_name";
      $specMsg = $this->getRecord($sql,
                 array(':id'=> $id,':user_name'=> $user_name));
-      return $specMsg;    
+      return $specMsg;
    }
 }
 ?>

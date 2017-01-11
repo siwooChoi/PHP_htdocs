@@ -4,6 +4,7 @@ class Request{
   //***isPost(): 요청 방식이 POST인지 조사 ***
   public function isPost(){
     if($_SERVER['REQUEST_METHOD']==='POST'){
+      // 값의 방식이 POST인가?를 검사
       return true;
     }
     return false;
@@ -43,6 +44,9 @@ class Request{
   // 2) Front Controller가 생략된 경우
   public function getBaseUrl(){
     $scriptName = $_SERVER['SCRIPT_NAME']; //스크립트의 경로
+    /* echo $_SERVER['SCRIPT_NAME']."<br>";
+     // /weblog.localhost_finish/mvc_htdocs/index.php 라는 문자열이 나온다.
+     */
     $requestUri = $this->getRequestUri(); //리퀘스트된 URL의 호스트부분에서 뒷부분
     // http://php.net/manual/kr/function.strpos.php
     if(0 === strpos($requestUri, $scriptName)){ // $requestUri의 선두에 $scriptName가 있다면 0
@@ -51,6 +55,7 @@ class Request{
       // http://php.net/manual/kr/function.dirname.php
       return rtrim(dirname($scriptName),'/');   // $scriptName의 우측끝의 '/'를 삭제
       // http://php.net/manual/kr/function.rtrim.php
+       // 문자열 마지막의 공백 (또는 다른문자열)을 제거
     }
     return '';
   }
@@ -58,7 +63,7 @@ class Request{
   public function getPath() {
 
     //Base URL 획득 : 리퀘스트된 URL에서 호스트부분에서 Front Controller까지의 경로
-    $base_url = $this->getBaseUrl();  
+    $base_url = $this->getBaseUrl();
 
     //리퀘스트된 URL에서 호스트 부분의 뒷부분 모두 다 획득
     $requestUri = $this->getRequestUri();

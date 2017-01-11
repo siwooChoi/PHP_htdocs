@@ -7,6 +7,9 @@ class AccountController extends Controller{
 
   public function signupAction(){
     if($this->_session->isAuthenticated()){
+      // 여기서는 $this->_session 이 보이지 않는다.
+      // 이 $this가 가리키는 것은 상속받고 있는 'Controller'의 것이다.
+
       $this->redirect('/account');
     }
     $signup_view = $this->render(array(
@@ -43,6 +46,7 @@ class AccountController extends Controller{
       $errors[]='사용자ID가 입력되어 있지 않음';
 
     }else if(!preg_match('/^\w{3,20}$/', $user_name)){
+      //   정규표현식.
       //^: 행의 선두를 표시
       //\w : 영문자 1개 문자를 의미
       //{n,m} : 직전의 문자가 n개 이상,m개 이하
@@ -129,6 +133,8 @@ class AccountController extends Controller{
       //http://php.net/manual/en/function.password-hash.php
       //http://php.net/manual/en/function.password-verify.php
       if(!$user || (!password_verify($password, $user['password']))){
+    // password_hash() : _문자열을 암호화_ 와 password_verify() : _암호화된 패스워드를 다시 정상으로_는 쌍으로 사용한다.
+
         $errors[]='인증 에러임';
       }else{
         $this->_session->setAuthenticateStaus(true);

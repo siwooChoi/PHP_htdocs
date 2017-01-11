@@ -34,7 +34,11 @@ abstract class AppBase{//계승을 전제로 하는 클래스로 abstract클래�
 
   //initialize()
   protected function initialize(){
-    $this->_router = new Router($this->getRouteDefinition());
+    $this->_router = new Router($this->getRouteDefinition()); // getRouteDefinition()의 반환값은 연상배열.
+                      // 이 AppBase는 abstract라서 객체화 될수 없는데 이 $this-> 는 무엇인가?
+                    // 이 class에서는 추상메서드로 정의만 되어 있을 뿐
+                    // AppBase를 상속받는 자식 클래스의 객체를 의미한다. (BlogApp의 객체이다.)
+                    //  (동적바인딩???  조사해봐야 됨.)
     $this->_connectModel = new ConnectModel();
     $this->_request = new Request();
     $this->_response = new Response();
@@ -89,6 +93,8 @@ abstract class AppBase{//계승을 전제로 하는 클래스로 abstract클래�
     $this->_response->send();
     //http://php.net/manual/kr/function.list.php
   }
+
+
   //***getContent()***
   //컨트롤러명을 구해내어 컨트롤러 클래스의 인스탄스를 생성
   //생성된 컨트롤러 클래스 인스탄스에 액션 실행을 의뢰

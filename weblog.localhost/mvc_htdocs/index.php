@@ -1,5 +1,5 @@
 <?php
-phpinfo();
+echo "test text";
 
   // require '../bootstrap.php';
   // require '../BlogApp.php';
