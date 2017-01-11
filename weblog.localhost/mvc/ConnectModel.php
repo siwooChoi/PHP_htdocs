@@ -18,6 +18,7 @@ class ConnectModel{
         $connection_strings['string'], //접속 문자열
         $connection_strings['user'], //DB사용자명
         $connection_strings['password'] //DB패스워드
+      
       );
     }catch(PDOException $e){
       exit("데이터 베이스 연결을 실패했습니다.:{$e->getMessage()}");

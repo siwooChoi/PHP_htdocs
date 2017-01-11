@@ -1,11 +1,12 @@
 <?php
-  require 'mvc/Loader.php'; 
+  require 'mvc/Loader.php';
 
   $loader = new Loader();
   $loader->regDirectory(dirname(__FILE__).'/mvc');
   // C:\xampp\htdocs\weblog.localhost_finish/mvc     <--- 이렇게 되는 것.
 
   $loader->regDirectory(dirname(__FILE__).'/models');
+  
   // C:\xampp\htdocs\weblog.localhost_finish/models     <--- 이렇게 되는 것.
 
 
