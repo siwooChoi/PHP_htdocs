@@ -1,3 +1,3 @@
 <?php
-class AuthorizedException extends Exception{};
-?>
+
+class AuthorizedException extends Exception {};
