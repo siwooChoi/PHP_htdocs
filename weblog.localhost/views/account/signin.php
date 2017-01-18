@@ -22,7 +22,6 @@
   )); ?>
 <!-- /views/account/inputs.php를 Rendering -->
   <p>
-    <input type="submit"
-           value="로그인" />
+    <input type="submit"  value="로그인" />
   </p>
 </form>

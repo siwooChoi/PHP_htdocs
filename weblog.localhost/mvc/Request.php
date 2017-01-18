@@ -13,6 +13,8 @@ class Request{
     if (isset($_GET[$name])) {
       return $_GET[$name];
     }
+
+
     return $param;
   }
 
@@ -81,6 +83,10 @@ class Request{
     // http://php.net/manual/kr/function.strlen.php
     $path = (string)substr($requestUri,
                            strlen($base_url));
+    // echo "Request.php의 getPath()에서의 var_dump(path) --->";
+              // var_dump($path);
+              // echo $path;
+    // echo "<br>";
     return $path;
   }
 }

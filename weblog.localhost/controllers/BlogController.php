@@ -23,7 +23,7 @@ class BlogController extends Controller {
   }
 
    public function postAction(){
-     //views/blog/index.php내의 form태그의 actionㅎ속성
+     //views/blog/index.php내의 form태그의 action속성
     if (!$this->_request->isPost()) {
         $this->httpNotFound();
     }

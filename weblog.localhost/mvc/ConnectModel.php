@@ -63,6 +63,7 @@ class ConnectModel {
       if (!isset($this->_modelList[$model_name])) {
           //데이터 모델명에 'Model'를 연결하고 이것을 클래스명으로 대입
           $mdl_class = $model_name . self::MODEL;
+          
           //PDO객체를 획득
           $cnt = $this->getModelConnection();
         //$mdl_class에 저장된 값으로 데이터 모델 클래스의 인스터스화
@@ -72,6 +73,7 @@ class ConnectModel {
       }
       //반환 값으로 데이터 모델 클래스의 인스탄스를 반환
       $modelObj = $this->_modelList[$model_name];
+
       return $modelObj;
   }
 

@@ -3,6 +3,7 @@
 class View{
     protected $_baseUrl; //view 파일의 폴더 경로 정보
     protected $_initialValue;
+    public $example;
     // 컨트롤러 render()에서의 전달정보 (리퀘스트,리퀘스트의 Base URL, Session)
     protected $_passValues = array();// View에 전달할 정보
 
@@ -11,6 +12,7 @@ class View{
                                 $initialValue = array()){
         $this->_baseUrl = $baseUrl;
         $this->_initialValue = $initialValue;
+        $this->example = "example test!";
     }
 
     //뷰파일을 읽어 들이는 메서드
@@ -19,15 +21,33 @@ class View{
       $this->_passValues[$name] = $value;
     }
 
-    //
+    // print $this->render('account/inputs',
+    //                            array('user_name' => $user_name, 'password' => $password,)
+    //                          );
     public function render(
       $filename,
       $parameters = array(),
       $template = false
     ){
       $view = $this->_baseUrl . '/' . $filename . '.php';
+
+      // var_dump($filename);
+
+      // echo "View클래스(객체)에서의 변수 filename의 값 : ";
+      // var_dump($filename);
+      // echo "<br>";
+
+      // echo "View클래스(객체)에서의 변수 parameters의 값 : ";
+      // var_dump($parameters);
+      // echo "<br>";
+
+      // echo "View클래스(객체)에서의 변수 view의 값 : ";
+      // var_dump($view);
+      // echo "<br>";
+
       extract(array_merge($this->_initialValue,
                           $parameters));
+
       //뷰파일 디렉토리 경로+리퀘스트객체+세션객체,액션메서드로부터 받은 배열 정보
   		//http://php.net/manual/kr/function.array-merge.php
   		//array_merge($arr1,$arr2),$arr1과 $arr2를 병합하여 배열반환(같은 키는 $arr2 우선)
@@ -55,6 +75,7 @@ class View{
     }
 
 //HTML Escape를 수행
+
     public function escape($string){
       //특수문자를 HTML 엔티티로 변경
 			//ENT_QUOTES 설정되면 ':&#039;값'

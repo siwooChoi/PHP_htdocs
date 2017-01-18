@@ -14,11 +14,13 @@ class Loader{
      //http://php.net/manual/kr/function.spl-autoload-register.php
   }
 
+
   public function requireClsFile($class) {
     foreach ($this->_directories as $dir) {
       $file = $dir . '/' . $class . '.php';
       if (is_readable($file)) {
       //http://php.net/manual/kr/function.is-readable.php
+      
         require $file;
         return;
       }

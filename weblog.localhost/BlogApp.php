@@ -39,11 +39,27 @@ class BlogApp extends AppBase {
         '/account'           => array('controller' => 'account',   'action'  => 'index'),
         '/account/:action'   => array('controller' => 'account'),
         '/follow'            => array('controller' => 'account',   'action'  => 'follow'),
+
           //BlogController 클래스 관련 Routing
         '/'                           => array('controller' => 'blog',  'action'  => 'index'),
         '/status/post'                => array('controller' => 'blog',  'action'  => 'post'),
         '/user/:user_name'            => array('controller' => 'blog',  'action'  => 'user'),
         '/user/:user_name/status/:id' => array('controller' => 'blog',  'action'  => 'specific'),
+
+        // TestController 클래스 관련 Routing
+        '/test/:action'             => array('controller' => 'test'),
       );
   }//getRouteDefinition - function
-}//BlogApp -class
+}
+
+//BlogApp -class
+// ※ 디버깅 코드 실행해보기.
+//  var_dump(getRouteDefinition());
+//      ex )
+//  '/' => array('controller' => 'blog', 'action' => 'index')
+//  [/] =>Array(
+//        [controller]=>blog            : BlogController
+//        [action]=>index               : IndexAction()
+//       )
+
+?>

@@ -37,6 +37,7 @@ abstract class AppBase{
   // ***initialize()***
   protected function initialize(){
     $this->_router       = new Router($this->getRouteDefinition());
+    // var_dump($this->getRouteDefinition());
     $this->_connectModel = new ConnectModel();
     $this->_request      = new Request();
     $this->_response     = new Response();
@@ -76,7 +77,9 @@ abstract class AppBase{
       $parameters = $this->_router
                             ->getRouteParams(
                                 $this->_request->getPath());
-
+      // echo "AppBase.php의 run()에서의 var_dump(parameters) --->";
+      // var_dump($parameters);
+      // echo "<br>";
       if ($parameters === false) {
         throw new FileNotFoundException(
           'NO ROUTE ' . $this->_request->getPath());

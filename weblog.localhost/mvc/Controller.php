@@ -46,7 +46,7 @@ abstract class Controller {//추상 클래스 이므로 사용하려면 계승�
       //AuthorizedException 예외 발생
     }
 
-  
+
     $content = $this->$action_method($params);
     //액션 메소드를 실행하여 컨텐츠를 App클래스의 getcontent로 반환
     return $content;
@@ -75,30 +75,33 @@ abstract class Controller {//추상 클래스 이므로 사용하려면 계승�
 
   // ***render()***
   //컨트롤러 서브 클래스의 액션메소드 (OOAction())에서 호출
-  protected function render(
-    $param = array(), $viewFile = null, $template = null
-  ){
+  protected function render( $param = array(), $viewFile = null, $template = null ) {
     //$param : 템플릿에 전달하는 변수 (연상배열)
       //$viewFile : 뷰파일명(null이면 액션명으로 대체)
       //$template : 레이아웃 파일명
+      // echo "Controller에서의 param : ";
+      // var_dump($param);
     $info = array(
         'request'  => $this->_request,
          //Request인스탄스
         'base_url' => $this->_request->getBaseUrl(),
          //Base URL정보
-        'session'  => $this->_session,
+        'session'  => $this->_session
         //Session정보
     );
 
-    $view = new View($this->_application
-    // view 클래스 인스탄스화
-                          ->getViewDirectory(),
+    $view = new View($this->_application->getViewDirectory(),   // view 클래스 인스탄스화
+      //var_dump($this->_application->getViewDirectory());   // C:\xampp\htdocs\weblog.localhost/views
                           //AppBase 클래스의 메소드
                             //뷰파일이 저장되어있는 폴더의 경로 반환
                      $info);
 
     if (is_null($viewFile)) {
         $viewFile = $this->_action;
+          // echo "Controller.php 에서의 변수 viewFile이 가지는 값은 : ";
+          // var_dump($viewFile);     // 클릭했을 때 화면보여주는 views폴더 내의 ~~~.php 파일의 이름
+          // echo "<br>";
+
     }
 
     if (is_null($template)) {
@@ -106,11 +109,17 @@ abstract class Controller {//추상 클래스 이므로 사용하려면 계승�
     }
 
     $path = $this->_controller . '/' .$viewFile;
+
+    // echo "Controller.php 에서의 변수 path가 가지는 값은 : ";
+    // var_dump($path);
+    // echo "<br>";
+
     //뷰파일의 경로 정보
     $contents = $view->render($path,
                               $param,
                               $template);
                               //view 클래스의 render()
+    // var_dump($contents);     // 파일의 코드 자체를 읽어오는 듯 하다. string(페이지마다 다르지만 큰 수);
     return $contents;
   }
 

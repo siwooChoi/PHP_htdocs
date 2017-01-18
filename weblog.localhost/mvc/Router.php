@@ -115,6 +115,9 @@ $_convertedRoutes <=== $converted
       if (preg_match('#^' . $pattern . '$#', $path, $p_match)){
         //$pattern을 반드시 만족하도록 ^시작종료$
         $par = array_merge($par, $p_match);
+        // echo "Router.php의 getRouteParams에서의 var_dump(par) --->";
+        // var_dump($par);
+        // echo "<br>";
         return $par;
       }
     }

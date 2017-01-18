@@ -7,6 +7,13 @@
   <?php if (isset($errors) && count($errors) > 0): ?>
   <?php print $this->render('errors', array('errors' => $errors)); ?>
   <?php endif; ?>
+
+	<?php
+				// echo "blog/index.php 에서의 base_url : ";
+				// var_dump($base_url);
+		?>
+
+
 	<p> 작성 글 입력 : </p>
 	<textarea name="message"
             rows="4"
