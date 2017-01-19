@@ -1,9 +1,9 @@
 <?php $this->setPageTitle('title', '로그인') ?>
 <h2>로그인</h2>
-<p>
-  <a href="<?php print $base_url; ?>/account/signup">계정 등록</a>
+<!-- <p> -->
+  <!-- <a href="<?php //print $base_url; ?>/account/signup">계정 등록</a> -->
    <!-- AccountController의 signupAction 메소드 -->
-</p>
+<!-- </p> -->
 
 <form action="<?php print $base_url; ?>/account/authenticate"
       method="post">

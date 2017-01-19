@@ -1,0 +1,79 @@
+#headerLine{
+  position: absolute;
+  width: 1140px;
+  height:200px;
+  background-color: blue;
+}
+
+/*로고*/
+#logo{
+ position: absolute;
+  width: 240px;
+  height:200px;
+  background-color: pink;
+}
+
+
+/*검색창*/
+#search{
+ position: absolute;
+ left:240px;
+ width: 650px;
+ height:200px;
+ background-color: #aaaaaa;
+ /*background-image:url('../imgs/bg/bg4.jpg');*/
+ background-position:left;
+}
+
+ /*로그인_on파트*/
+ .login_on{
+   position: absolute;
+   left:890px;
+   width:250px;
+   height: 200px;
+   background-color: #cccccc;
+   /*color:white;*/
+ }
+
+/*로그인_off파트*/
+ #login_off{
+   position: absolute;
+   left:890px;
+   width:250px;
+   height: 200px;
+   background-color: #cccccc;
+   /*color:white;*/
+ }
+
+
+/*메뉴 바 파트*/
+ #menu{
+   /*position: relative;*/
+   position: absolute;
+   top:200px;
+   width: 1140px;
+    height:100px;
+    background-color: black;
+ }
+
+/*메뉴 바안의 항목 파트*/
+ .menulist{
+  float:left;
+   width: 180px;
+   height: 50px;
+   margin:25px;
+   margin-left: 70px;
+   background-color: black;
+   color:white;
+   line-height:50px;
+   text-align: center;
+ }
+
+ #mainContent{
+  position: absolute;
+  top:300px;
+  width: 1140px;
+  height: auto;
+   /*background-color: #444444;*/
+   /*background-image: url("../imgs/black_bg.png");*/
+ }

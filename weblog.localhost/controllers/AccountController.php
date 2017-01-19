@@ -1,10 +1,16 @@
 <?php
 class AccountController extends Controller {
   protected $_authentication = array('index', 'signout');
+
    //login에 필요한 action정의
   const SIGNUP = 'account/signup';
   const SIGNIN = 'account/signin';
   const FOLLOW = 'account/follow';
+
+  public function alertAction(){
+    // print "<script> alert('로그인 후 이용하세요.') </script>";
+    $this->redirect('/account');
+  }
 
   public function signupAction() {
     if ($this->_session->isAuthenticated()) {
@@ -125,6 +131,11 @@ class AccountController extends Controller {
     return $index_view;
   }
 
+  public function tAction(){
+    return $this->render();
+    // echo "aa";
+  }
+
   public function signinAction() {
     // /views/account/signin.php
     if ($this->_session->isAuthenticated()) {
@@ -139,13 +150,17 @@ class AccountController extends Controller {
     ));
     return $signin_view;
 	}
+  public function testAction(){
+
+
+  }
 
   public function authenticateAction() {
      if (!$this->_request->isPost()) {
       $this->httpNotFound();
     }
-
    if ($this->_session->isAuthenticated()) {
+
       return $this->redirect('/account');
     }
 
@@ -187,8 +202,12 @@ class AccountController extends Controller {
              ->setAuthenticateStaus(true);
         $this->_session
              ->set('user', $user);
-        return $this->redirect('/');
+        $result=$this->redirect('/');
       }
+      // print"<br>?????????????????????????<br>";
+      // var_dump($result);
+      // print"<br>?????????????????????????<br>";
+
     }
 
     return $this->render(array(

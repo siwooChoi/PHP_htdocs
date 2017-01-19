@@ -8,64 +8,76 @@
 Weblog
 </title>
 <!-- { endfor; endwhile; endswitch; endforeach;} -->
-<link rel="stylesheet"
-      type="text/css"
-      href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/index_style.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/css/index_Css.css" /> -->
 </head>
 <body>
 
 <!-- /////////////////////////////// headLine  ///////////////////////////////////////-->
-<div id="header">
 
-	<h1><a href="<?php print $base_url; ?>/">
-    <!--$request, $base_url,$session==> Controller에서 View 객체 생성시 전달해줌 -->
-  --- Weblog --- Weblog --- Weblog --- Weblog --- Weblog ---
-  </a></h1>
-</div>
+	<div id='headerLine'>
+	            <!-- logo-->
+	            <div id='logo'>
+	              <a href="<?php print $base_url; ?>/">
+	                <img src="/img/bg/bg6.jpg" height="100%" width="100%">
+	              </a>
+	            </div>
+	  <!-- search?? -->
+	    <div id='search'>
+	      <?php require_once "product/search.php"; ?>
+				<!-- <a href="<?php print $base_url; ?>/"></a> -->
+	    </div>
+	  <!-- login-->
+		<div class='login_on'>
+				<?php require_once "account/loginflag.php"; ?>
+		</div>
+		 <!-- 로그인 파트 끝 -->
+</div><!--headerLine 끝나는 지점-->
 
-  <p>
-		<?php if ($session->isAuthenticated()): ?>
-			<a href="<?php print $base_url; ?>/">
-      Top Page
-      </a>
-          &nbsp
-			<a href="<?php print $base_url; ?>/account">
-      계정
-      </a>
-		<?php else: ?>
-			<a href="<?php print $base_url; ?>/account/signin">
-      로그인
-    </a>
-              &nbsp
-			<a href="<?php print $base_url; ?>/account/signup">
-      계정 등록(회원가입)
-      </a>
+	<!-- 메뉴 목록 시작 -->
 
-              &nbsp
+		<?php //if ($session->isAuthenticated()): ?>
+			<div id="menu">
+			<!-- <div id="menu"> -->
+					<a href="<?php print $base_url; ?>/product/testButton">
+						<div class='menulist'> 메인 화면  </div>
+					</a>
 
-      <a href="<?php print $base_url; ?>/test/test1">
-      테스트1function
-      </a>
+					<a href="<?php print $base_url; ?>/">
+		    		<div class='menulist'> 임시 게시판 </div>
+		      </a>
 
-              &nbsp
+					<a href="">
+						<div class='menulist'> 장바구니  </div>
+					</a>
+			</div>
 
-      <a href="<?php print $base_url; ?>/test/test2">
-      테스트2function
-      </a>
+		<?php //else: ?>
+			<!-- <div class="menu">
+
+				<a href="<?php //print $base_url; ?>/product/testButton">
+					<div class='menulist'> 메인 화면  </div>
+				</a>
+
+				<a href="<?php //print $base_url; ?>/">
+	    		<div class='menulist'> 임시 게시판 </div>
+	      </a>
+
+				<a href="">
+					<div class='menulist'> 장바구니  </div>
+				</a>
+			</div> -->
+			<!-- 메뉴 끝 div -->
 
 
-		<?php endif; ?>
-	</p>
-</div>
 
-<div id="nav">
 
-</div>
-                                          <hr>
-                                        <p style="text-align:center">  ( 아래쪽이 main_div ) </p>
-                                          <hr>
 
-<div id="main">
+		<?php //endif; ?>
+
+
+
+<div id="mainContent">
 	<?php print $_content; ?>
   <?php  //var_dump($_content); ?>
   <!-- $_content: View 객체의 render()메서드에서 전달해줌 -->

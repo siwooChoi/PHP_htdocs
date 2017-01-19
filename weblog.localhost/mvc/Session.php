@@ -22,14 +22,17 @@ class Session{
   // $_SESSION에 세션값 설정
   public function set($key, $value){
     $_SESSION[$key] = $value;
+
   }
 
   // *** get() ***
   // $_SESSION에서 값을 획득
   public function get($key, $par = null){
     if (isset($_SESSION[$key])) {
+
       return $_SESSION[$key];
     }
+
     return $par;
   }
 

@@ -56,7 +56,7 @@
     ){
     //http://php.net/manual/kr/function.is-array.php
     //http://php.net/manual/kr/function.in-array.php
-    //$this -> _authentiation 이 배열이고 $this->_authentication 안에 $action이 존해가는지
+    //$this -> _authentiation 이 배열이고 $this->_authentication 안에 $action이 존재하는지
     return true;
     }
     return false;
