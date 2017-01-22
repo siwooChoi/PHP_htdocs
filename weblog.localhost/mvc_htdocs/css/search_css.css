@@ -1,0 +1,17 @@
+/*검색창*/
+#search{
+ position: absolute;
+ left:240px;
+ width: 650px;
+ height:200px;
+ /*background-color: #red;*/
+ background-image:url('/img/bg/bg4.jpg');
+ background-position:left;
+}
+
+
+#searchbox{
+  position: absolute;
+  top:120px;
+  left:200px;
+}

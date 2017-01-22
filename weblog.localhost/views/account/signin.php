@@ -1,5 +1,7 @@
+
+<link href="/css/login_css.css" type="text/css" rel="stylesheet">
 <?php $this->setPageTitle('title', '로그인') ?>
-<h2>로그인</h2>
+<h2 class="h2_login">로그인</h2>
 <!-- <p> -->
   <!-- <a href="<?php //print $base_url; ?>/account/signup">계정 등록</a> -->
    <!-- AccountController의 signupAction 메소드 -->
@@ -16,12 +18,10 @@
     <?php print $this->render('errors', array('errors' => $errors)); ?>
   <?php endif; ?>
 <!-- /views/errors.php를 Rendering -->
+  <?php print $this->render('account/inputs', array('user_name' => $user_name, 'password' => $password,)); ?>
 
-  <?php print $this->render('account/inputs', array(
-      'user_name' => $user_name, 'password' => $password,
-  )); ?>
 <!-- /views/account/inputs.php를 Rendering -->
   <p>
-    <input type="submit"  value="로그인" />
+    <input class='signin_loginButton'type="submit"  value="로그인" />
   </p>
 </form>

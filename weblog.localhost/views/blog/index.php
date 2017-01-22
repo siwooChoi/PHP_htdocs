@@ -15,7 +15,7 @@
 
 
 	<p> 작성 글 입력 : </p>
-	<textarea name="message"
+	<textarea name="message_text"
             rows="4"
             cols="70"><?php print $this->escape($message); ?>
   </textarea>

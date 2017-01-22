@@ -1,0 +1,31 @@
+body{
+  background-color: black;
+  color: white;
+  /*background-image: url("/img/sbg/sbg2.jpg");*/
+  background-repeat: no-repeat;
+  /*background-position: right;*/
+  background-size:100%, 100%;
+}
+
+
+/*입력 텍스트박스*/
+.inputTextbox{
+  background-color: black;
+  position: absolute;
+  top:30%;
+  left:40%;
+}
+
+/*게시판 메뉴*/
+.boardtable2{
+  position: absolute;
+  top: 100%;
+  width:70%;
+  left:130px;
+}
+/*글작성 버튼*/
+.createcon{
+  position: absolute;
+  top:30%;
+  right: 20%;
+}

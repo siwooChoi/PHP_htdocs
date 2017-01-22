@@ -24,10 +24,12 @@ abstract class ExecuteModel{
                        $sql,
                        array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
       //Prepared Statement의 실행
+      // var_dump($parameter);
       $stmt->execute($parameter);
       //실행 결과를 PDOStatement 객체로 반환
       return $stmt;
     }
+
 
     // ***getAllRecord()***
     public function getAllRecord($sql,

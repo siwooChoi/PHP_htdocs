@@ -19,6 +19,10 @@ class AccountController extends Controller {
     $signup_view = $this->render(array(
         'user_name' => '',
         'password'  => '',
+        'nick'      => '',
+        'tel'       => '',
+        'email'     => '',
+        'basket'    => '',
         '_token'    => $this->getToken(self::SIGNUP),
 //Controller클래스의 CSRF(Cross-site request forgery,사이트간 요청위조) 대책용 Token을생성
 //http://namu.wiki/w/CSRF
@@ -45,10 +49,42 @@ class AccountController extends Controller {
         return $this->redirect('/' . self::SIGNUP);
       }
       //3>POST 전송방식으로 전달 받은 데이터를 변수에 저장
-      $user_name = $this->_request
-                        ->getPost('user_name');
-      $password  = $this->_request
-                        ->getPost('password');
+      $user_name = $this->_request->getPost('user_name');
+      $password  = $this->_request->getPost('password');
+      $password2  = $this->_request->getPost('password2');
+      $nick = $this->_request->getPost('nick');
+        $tel1 = $this->_request->getPost('tel1');
+        $tel2 = $this->_request->getPost('tel2');
+        $tel3 = $this->_request->getPost('tel3');
+      $tel = $tel1."-".$tel2."-".$tel3;
+
+        $email1 = $this->_request->getPost('email1');
+        $email2 = $this->_request->getPost('email2');
+      $email = $email1."@".$email2;
+
+      // echo "--------- 어카운트 컨트롤러 -------------<br>";
+      // echo "user_name : ";
+      // var_dump($user_name);
+      // echo "<br>";
+      //
+      // echo "password : ";
+      // var_dump($password);
+      // echo "<br>";
+      //
+      // echo "user_nick : ";
+      // var_dump($nick);
+      // echo "<br>";
+      //
+      // echo "user_tel : ";
+      // var_dump($tel);
+      // echo "<br>";
+      //
+      // echo "user_email : ";
+      // var_dump($email);
+      // echo "<br>";
+
+
+
 
       $errors = array();
       //4>사용자 ID체크
@@ -66,7 +102,9 @@ class AccountController extends Controller {
         $user_name)
       ){
         $errors[] = '사용자 ID는 영문 3문자 이상 20자 이내로 입력하시오';
-      } else if (!$this->_connect_model
+      }  else if($password != $password2){
+        $errors[] = 'PW와 PW확인이 일치하지 않습니다.';
+      }  else if (!$this->_connect_model
                        ->get('User')
                        ->isOverlapUserName($user_name)
                        //ConnectionModel 의 get()으로 UserModel 클래스 객체생성후 isOverlapUserName 호출
@@ -88,7 +126,7 @@ class AccountController extends Controller {
         //UserModel클래스의  insert()로 사용자 계정 등록
         $this->_connect_model
              ->get('User')
-             ->insert($user_name, $password);
+             ->insert($user_name, $password, $nick, $tel, $email );
 
              //세션ID재생성
         $this->_session
@@ -109,6 +147,9 @@ class AccountController extends Controller {
       return $this->render(array(
           'user_name' => $user_name,
           'password'  => $password,
+          'user_nick' => $nick,
+          'user_tel'  => $tel,
+          'user_email'=> $email,
           'errors'    => $errors,
           '_token'    => $this->getToken(self::SIGNUP),
       ), 'signup');
@@ -160,7 +201,6 @@ class AccountController extends Controller {
       $this->httpNotFound();
     }
    if ($this->_session->isAuthenticated()) {
-
       return $this->redirect('/account');
     }
 
@@ -202,7 +242,9 @@ class AccountController extends Controller {
              ->setAuthenticateStaus(true);
         $this->_session
              ->set('user', $user);
-        $result=$this->redirect('/');
+
+        // 로그인 후 바로 보여지는 경로
+        $result=$this->redirect('/product/product');
       }
       // print"<br>?????????????????????????<br>";
       // var_dump($result);

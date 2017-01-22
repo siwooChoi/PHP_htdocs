@@ -1,4 +1,5 @@
-<table>
+<link href="/css/login_css.css" type="text/css" rel="stylesheet">
+<table class='loginbox'>
 <tr>
   <th>사용자ID</th>
   <td>
@@ -8,13 +9,6 @@
 
   </td>
 </tr>
-
-<?php
-// echo "<br>inputs.php에서의 this란 : ";    // this ---> View객체
-// var_dump($this);
-// echo "<br>";
-?>
-
 
 <tr>
   <th>패스워드</th>

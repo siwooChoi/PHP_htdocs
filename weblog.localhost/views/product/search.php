@@ -1,11 +1,8 @@
-<input type="text" name="name" value="">
-<input type="button" name="name" value="확인">
 
 
+<link href="/css/search_css.css" type="text/css" rel="stylesheet">
+<form id="searchbox" action="<?php print $base_url; ?>/product/search" method="post">
+<input  type="text" style="width:200px;"name="searchValue" value="">
+<input type="submit" name="name" value="검색">
 
-
-<?php
-  // var_dump($_SESSION);
-  echo "<br>";
-  var_dump($_SESSION['user']['user_name']);
-?>
+</form>

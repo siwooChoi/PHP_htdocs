@@ -1,0 +1,25 @@
+body{
+  /*background-color: black;*/
+  color: white;
+  background-image: url("/img/sbg/sbg2.jpg");
+  background-repeat: no-repeat;
+  /*background-position: right;*/
+  background-size:100%, 100%;
+}
+
+/*메인 테이블*/
+.create_textbox{
+  position: absolute;
+  left: 200px;
+}
+
+/*작성하기 버튼*/
+.upb1{
+  position: absolute;
+  left:540px;
+}
+/*취소하기 버튼*/
+.upb2{
+  position: absolute;
+  left:630px;
+}

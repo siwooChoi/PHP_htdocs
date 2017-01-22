@@ -11,7 +11,7 @@ class FollowingModel extends ExecuteModel {
         ':following_id' => $follow,
     ));
   }
-	
+
   public function isFollowedUser($user_id, $follow) {
     $sql = "SELECT COUNT(user_id) AS count
             FROM   followingUser

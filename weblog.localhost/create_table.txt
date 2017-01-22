@@ -7,6 +7,20 @@ CREATE TABLE user(
     UNIQUE KEY user_name_index(user_name)
 ) ENGINE = INNODB;
 
+  -- 수정본 --
+create table user(
+  id INTEGER AUTO_INCREMENT,
+  user_name char(10) not null,
+  password varchar(255) not null,
+  nick char(10) not null,
+  tel char(20) not null,
+  email char(80),
+  time_stamp DATETIME,
+  basket varchar(6),
+  primary key(id),
+  UNIQUE KEY user_name_index(user_name)
+) ENGINE = INNODB;
+
 CREATE TABLE status(
     id INTEGER AUTO_INCREMENT,
     user_id INTEGER NOT NULL,
@@ -16,7 +30,55 @@ CREATE TABLE status(
     INDEX user_id_index(user_id)
 ) ENGINE = INNODB;
 
-CREATE TABLE following(
+
+   -- 수정본 --
+CREATE TABLE status(
+    id INTEGER AUTO_INCREMENT,
+    user_id INTEGER NOT NULL,
+    user_name char(10),
+    user_nick char(10),
+    message_name VARCHAR(255),
+    message_text text,
+    time_stamp DATETIME,
+    PRIMARY KEY(id),
+    INDEX user_id_index(user_id)
+) ENGINE = INNODB;
+
+
+
+create table product (
+ p_Number int AUTO_INCREMENT,
+ p_Name varchar(30) not null,
+ p_Price int not null,
+ p_Comment varchar(40),
+ p_Type varchar(15),
+ p_Amount int not null,
+ p_Imgname varchar(40),
+ p_detail text,
+ primary key(p_Number)
+);
+
+set names euc-kr;
+
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('봄베이 사파이어', 49000, '진', '증류주', 50, 'Bombay_Sapphire.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('앱솔루트', 52000, '보드카', '증류주', 50, 'absolute.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('바카디', 51000, '럼', '증류주', 50, 'bacardi.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('잭다니엘', 49000, '위스키', '증류주', 50 , 'Jack_Daniels.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('레미 마르텡', 55000, '브랜디', '증류주', 50 , 'Remy_Martin.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('호세 쿠에르보', 47000, '데킬라', '증류주', 50 , 'Jose_Cuervo.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('말리부', 15000, '코코넛향 리큐르', '리큐르', 35 , 'Malibu.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('바나나 리큐르', 14000, '바나나향 리큐르', '리큐르', 35 , 'MB_Banana.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('블루 큐라소', 12000, '오렌지향 푸른색 리큐르', '리큐르', 35 , 'MB_Blue.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('멜론 리큐르', 13000, '멜론향 리큐르', '리큐르', 35 , 'MB_Melon.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('피치 리큐르', 11000, '복숭아향 리큐르', '리큐르', 35 , 'MB_Peach.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('트리플섹 큐라소', 13000, '오렌지향 투명색 리큐르', '리큐르', 35 , 'MB_Triple.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('오렌지쥬스', 2500, '오렌지맛 쥬스 1.5L', '주스및기타', 120 , 'Orange_Juice.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('파인애플쥬스', 2800, '파인애플맛 쥬스 1.5L', '주스및기타', 120 , 'Pine_Juice.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('스윗 앤 사워믹스', 16000, '칵테일 재료 스윗 앤 사워믹스', '주스및기타', 130 , 'SnS.jpg', '상세설명 기입란');
+INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('토닉워터', 700, '칵테일용 탄산수', '주스및기타', 900 , 'Tonic.jpg', '상세설명 기입란');
+
+
+CREATE TABLE followinguser(
     user_id INTEGER,
     following_id INTEGER,
     PRIMARY KEY(user_id, following_id)

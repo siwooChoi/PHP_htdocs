@@ -8,8 +8,8 @@
 Weblog
 </title>
 <!-- { endfor; endwhile; endswitch; endforeach;} -->
-<link rel="stylesheet" type="text/css" href="/css/index_style.css" />
-<!-- <link rel="stylesheet" type="text/css" href="/css/index_Css.css" /> -->
+<link rel="stylesheet" type="text/css" href="/css/template_css.css">
+
 </head>
 <body>
 
@@ -39,17 +39,22 @@ Weblog
 		<?php //if ($session->isAuthenticated()): ?>
 			<div id="menu">
 			<!-- <div id="menu"> -->
-					<a href="<?php print $base_url; ?>/product/testButton">
+					<a href="<?php print $base_url; ?>/product/product">
 						<div class='menulist'> 메인 화면  </div>
 					</a>
 
-					<a href="<?php print $base_url; ?>/">
-		    		<div class='menulist'> 임시 게시판 </div>
+					<a href="<?php print $base_url; ?>/board/contentBoard">
+		    		<div class='menulist'> 게시판 </div>
 		      </a>
 
-					<a href="">
-						<div class='menulist'> 장바구니  </div>
-					</a>
+					<?php if((isset($_SESSION['user']['user_name'])) && $_SESSION['user']['user_name'] == "admin") {?>
+
+					<?php } else {
+						?><a href="<?php print $base_url; ?>/product/showBasket">
+							<div class='menulist'> 장바구니  </div>
+						</a>
+						<?php
+					}?>
 			</div>
 
 		<?php //else: ?>

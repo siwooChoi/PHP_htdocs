@@ -1,11 +1,13 @@
+<?php echo "status.php이다."; ?>
 <div class="status">
 	<div class="status_content">
   <a href="<?php print $base_url; ?>/user/<?php print $this->escape(
   $status['user_name']); ?>">
+
 	<?php print $this->escape($status['user_name']); ?>
 	<!-- userAction을 위한 링크 생성 -->
   </a>
-	<?php print $this->escape($status['message']); ?>
+	<?php print $this->escape($status['message_name']); ?>
 	</div>
 	<div>
   <a href="<?php print $base_url; ?>/user/<?php print $this->escape(
@@ -20,7 +22,7 @@
 		// echo var_dump($base_url);
 		// echo "<br><br>";
 
-		
+
 	?>
 	<?php  print $this->escape($status['time_stamp']); ?>
 	<!-- specificAction을 위한 링크 생성 -->

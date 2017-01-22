@@ -20,7 +20,11 @@ class Request{
 
   //***getPost(): POST방식으로 요청된 데이터를 획득 ***
   public function getPost($name, $param = null){
+    // echo "------- 리퀘스트에서 getPost() ------ <br>";
     if (isset($_POST[$name])) {
+      // echo $name." : ";
+      // var_dump($_POST[$name]);
+      // echo "<br>";
       return $_POST[$name];
     }
     return $param;

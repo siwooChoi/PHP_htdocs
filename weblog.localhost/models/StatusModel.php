@@ -11,18 +11,26 @@ class StatusModel extends ExecuteModel {
       array(
            ':user_id'    => $user_id,
            ':message'    => $message,
-           ':time_stamp' => $now->format('Y-m-d H:i:s'),
+           ':time_stamp' => $now->format('Y-m-d H:i'),
     ));
 	}
 
 	// ***getUserData()***
 	public function getUserData($user_id) {
-	  $sql = "
+	  // $sql = "  // 기존의 user, status, following 을 엮는 sql
+		// 	SELECT   a.*, u.user_name
+		// 	FROM     status a LEFT JOIN user u ON a.user_id = u.id
+		// 	                  LEFT JOIN followingUser f ON f.following_id = a.user_id
+		// 	                                            AND f.user_id = :user_id
+		// 	WHERE    f.user_id = :user_id OR u.id = :user_id
+		// 	ORDER BY a.time_stamp DESC
+	  // ";
+
+		$sql = "
 			SELECT   a.*, u.user_name
 			FROM     status a LEFT JOIN user u ON a.user_id = u.id
-			                  LEFT JOIN followingUser f ON f.following_id = a.user_id
-			                                            AND f.user_id = :user_id
-			WHERE    f.user_id = :user_id OR u.id = :user_id
+
+			WHERE     u.id = :user_id
 			ORDER BY a.time_stamp DESC
 	  ";
 	    $user = $this->getAllRecord(

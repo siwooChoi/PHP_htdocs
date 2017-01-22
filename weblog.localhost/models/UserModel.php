@@ -5,16 +5,20 @@ class UserModel extends ExecuteModel {
     //패스워드의 해쉬 처리 : 암호화
     //http://php.net/manual/kr/datetime.format.php
     //DateTime::format
-  public function insert($user_name, $password) {
+  public function insert($user_name, $password, $nick, $tel, $email) {
       $password = password_hash($password,
                                 PASSWORD_DEFAULT);
       $now = new DateTime();
-      $sql = "INSERT INTO user(user_name, password, time_stamp)
-              VALUES(:user_name, :password, :time_stamp)";
+      $sql = "INSERT INTO user(user_name, password, nick, tel, email, time_stamp, basket)
+              VALUES(:user_name, :password, :nick, :tel, :email, :time_stamp, :basket)";
       $stmt = $this->execute($sql, array(
           ':user_name'  => $user_name,
           ':password'   => $password,
+          ':nick'       => $nick,
+          ':tel'        => $tel,
+          ':email'      => $email,
           ':time_stamp' => $now->format('Y-m-d H:i:s'),
+          ':basket'     => "f"
       ));
        // execute(); 추상 클래스 ExecuteModel의 메소드
   }

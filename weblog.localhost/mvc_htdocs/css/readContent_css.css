@@ -1,0 +1,46 @@
+body{
+  /*background-color: black;*/
+  color: white;
+  background-image: url("/img/sbg/sbg2.jpg");
+  background-repeat: no-repeat;
+  /*background-position: right;*/
+  background-size:100%, 100%;
+}
+
+/*번호제목 테이블*/
+.ftable{
+  position: absolute;
+  top: 70px;
+  margin-left: 10%;
+  width: 70%;
+}
+
+
+/*메인테이블*/
+.ftable2{
+  position: absolute;
+  width:70%;
+  margin-left: 10%;
+  top:145px;
+}
+
+/*수정하기 버튼*/
+.read_modi{
+  position: absolute;
+  top:720;
+  left:850px;
+}
+
+/*삭제하기 버튼*/
+.read_dele{
+  position: absolute;
+  top:720;
+  left:930px;
+}
+
+/*목록으로 버튼*/
+.read_back{
+  position: absolute;
+  top:720;
+  left:1030px;
+}

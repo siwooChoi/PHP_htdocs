@@ -1,16 +1,16 @@
 <?php
 class MallApp extends AppBase {
-  // protected $_signinAction = array('product', 'product');
-  protected $_signinAction = array('account', 'signin');
+  protected $_signinAction = array('product', 'product');
+  // protected $_signinAction = array('account', 'signin');
   // 페이지 첫 시작시 어떤 컨트롤러의, 어떤 액션을 시작할 것인가  를 의미하는 것 같다.
 
   //DB접속 실행
   protected function doDbConnection() {
     $this->_connectModel->connect('master', array( //접속이름
       //AppBase의 생성자에 들어 있는 _connectModel
-      'string'   => 'mysql:dbname=weblog;host=localhost; charset=utf8',   //DB이름 - weblog
+      'string'   => 'mysql:dbname=syu_db;host=localhost; charset=utf8',   //DB이름 - weblog
       'user'     => 'root',                                               //DB사용자명
-      'password' => '0000',                                               //DB사용자의 패스워드
+      'password' => '0000'                                               //DB사용자의 패스워드
     ));
   }//doDbConnection - function
 
@@ -43,17 +43,21 @@ class MallApp extends AppBase {
         // '/follow'            => array('controller' => 'account',   'action'  => 'follow'),
 
           //BlogController 클래스 관련 Routing
-        '/'                           => array('controller' => 'blog',  'action'  => 'index'),
-        '/status/post'                => array('controller' => 'blog',  'action'  => 'post'),
-        '/user/:user_name'            => array('controller' => 'blog',  'action'  => 'user'),
-        '/user/:user_name/status/:id' => array('controller' => 'blog',  'action'  => 'specific'),
+        // '/'                           => array('controller' => 'blog',  'action'  => 'index'),
+        // '/status/post'                => array('controller' => 'blog',  'action'  => 'post'),
+        // '/user/:user_name'            => array('controller' => 'blog',  'action'  => 'user'),
+        // '/user/:user_name/status/:id' => array('controller' => 'blog',  'action'  => 'specific'),
 
         // TestController 클래스 관련 Routing
         '/test/:action'             => array('controller' => 'test'),
 
         // ProductController 클래스 관련 Routing
         // '/product'           => array('controller' => 'product',   'action'  => 'index'),
+        '/'                  => array('controller' => 'product',  'action'  => 'product'),
         '/product/:action'   => array('controller' => 'product'),
+
+        // BoardController  클래스 관련 Routing
+        '/board/:action'   => array('controller' => 'board'),
       );
   }//getRouteDefinition - function
 }

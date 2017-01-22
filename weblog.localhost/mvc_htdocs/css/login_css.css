@@ -1,0 +1,73 @@
+body{
+  background-color: black;
+  color: white;
+}
+
+.top_loginflag{
+  background-color: black;
+}
+
+/*로그인중인 아이디*/
+.login_id{
+  position: absolute;
+  left: 55px;
+  top:50px;
+}
+
+/*로그인_on파트*/
+.login_on{
+  position: absolute;
+  left:890px;
+  width:250px;
+  height: 200px;
+  background-color: black;
+  /*color:white;*/
+}
+
+/*로그인_off파트*/
+ #login_off{
+   position: absolute;
+   left:890px;
+   width:250px;
+   height: 200px;
+   background-color: black;
+   /*color:white;*/
+ }
+
+/*상단 로그인버튼*/
+.top_login_button{
+  position: absolute;
+  height: 50px;
+  left:50px;
+  top:120px;
+}
+
+/*상단 회원가입버튼*/
+.top_signup_button{
+  position: absolute;
+  height: 43px;
+  left:130px;
+  top:120px;
+}
+
+/*h2 로그인글자*/
+.h2_login{
+  position: absolute;
+  top:70px;
+  left: 320px;
+}
+
+/*로그인입력 박스*/
+.loginbox {
+  position: absolute;
+  top:150px;
+  left: 200px;
+}
+
+/*signin 로그인버튼*/
+.signin_loginButton{
+  position: absolute;
+  height: 50px;
+  top:155px;
+  left: 440px;
+}

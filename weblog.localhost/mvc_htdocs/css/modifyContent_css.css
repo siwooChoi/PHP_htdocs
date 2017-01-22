@@ -1,0 +1,29 @@
+body{
+  /*background-color: black;*/
+  color: white;
+  background-image: url("/img/sbg/sbg2.jpg");
+  background-repeat: no-repeat;
+  /*background-position: right;*/
+  background-size:100%, 100%;
+}
+
+/*메인 테이블*/
+.memo_row_modi{
+  position: absolute;
+  top:50px;
+  left: 200px;
+  color:white;
+}
+
+
+/*수정하기 버튼*/
+.modi_modi{
+  position: absolute;
+  left:500px;
+}
+
+/*취소 버튼*/
+.modi_can{
+  position: absolute;
+  left:590px;
+}

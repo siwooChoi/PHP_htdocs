@@ -3,7 +3,7 @@
 class View{
     protected $_baseUrl; //view 파일의 폴더 경로 정보
     protected $_initialValue;
-
+    
     // protected $p_rowCount;
     // public $example;
 
@@ -74,7 +74,7 @@ class View{
 
       ob_implicit_flush(0);
 
-      
+
       require $view;
 
 
