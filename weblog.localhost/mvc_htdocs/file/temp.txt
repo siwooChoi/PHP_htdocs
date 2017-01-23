@@ -1,0 +1,18 @@
+	장바구니 여부 다시 f 로 만들기
+update user set basket = 'f' where user_name = 'test1'; 
+
+
+insert into test1_basket(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, regist_day) values ('tonic', 500, 'tan', 'ttt', 5, 'aaa', '2017-01-21 09:05')
+
+
+$now = new DateTime(); 
+$now->format('Y-m-d H:i'),
+
+                <input type="hidden" name="insertBasket_pNumber" value="<?php  echo $product[$i]['p_Number']; ?>">
+                <input type="hidden" name="insertBasket_pName" value="<?php  echo $product[$i]['p_Name']; ?>">
+                <input type="hidden" name="insertBasket_pPrice" value="<?php  echo $product[$i]['p_Amount']; ?>">
+                <input type="hidden" name="insertBasket_pComment" value="<?php  echo $product[$i]['p_Comment']; ?>">
+                <input type="hidden" name="insertBasket_pType" value="<?php  echo $product[$i]['p_Type']; ?>">
+                <input type="hidden" name="insertBasket_pAmount" value="<?php  echo $product[$i]['p_Amount']; ?>">
+                <input type="hidden" name="insertBasket_pImgname" value="<?php  echo $product[$i]['p_Imgname']; ?>">
+                <input type="hidden" name="insertBasket_pDetail" value="<?php  echo $product[$i]['p_detail']; ?>">

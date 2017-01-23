@@ -1,0 +1,10 @@
+body{
+  background-color: black;
+  color: white;
+}
+
+
+
+
+삭제대상 css
+Boardcss.css   

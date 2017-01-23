@@ -14,7 +14,10 @@ if(!isset($_SESSION['user']['user_name'])){
 
   <table class="inputTextbox">
     <tr><td>
-      <input style="text-align:right;" type="text" value="">
+      <form action="<?php echo $base_url; ?>/board/searchContent" method="post">
+        <input style="text-align:right;" name="searchContent" type="text" value="">
+        <input type="submit" value="검색">
+      </form>
     </tr><td/>
 <br><br><br>
 
@@ -35,12 +38,23 @@ if(!isset($_SESSION['user']['user_name'])){
     </td>
   </tr>
     <?php
-    $rowCount = count($content);
+    if(isset($content)){
+      $rowCount = count($content);
+    } else{
+      $rowCount = 1;
+      $content[0]['id']           = '';
+      $content[0]['user_id']      = '';
+      $content[0]['user_name']    = '';
+      $content[0]['user_nick']    = '';
+      $content[0]['message_name'] = '';
+      $content[0]['message_text'] = '';
+      $content[0]['time_stamp']   = '';
+    }
       //페이징 하려면...
       // 전체 카운트 필요.
       // 보여주기만 할 갯수카운트 필요. ex)5 <--- 현재의 $rowCount 대신에 5가 들어가야된다.
 
-    $count = 0;   // 페이징을 위한 게시글 숫자카운트
+    // $count = 0;   // 페이징을 위한 게시글 숫자카운트
 
       for($i = 0 ; $i<$rowCount; $i++){     ?>
         <?php if($i == 0){ ?>
@@ -65,7 +79,7 @@ if(!isset($_SESSION['user']['user_name'])){
           ?>
         </td>
         <td style="width:19%; text-align:center">
-          <?php echo $content[$i]['user_nick']; ?>
+          <?php echo $content[$i]['user_name']; ?>
         </td>
         <td>
           <a href="<?php echo $base_url; ?>/board/openBoard?page=<?php echo $content[$i]['id']; ?>">
@@ -78,7 +92,7 @@ if(!isset($_SESSION['user']['user_name'])){
         </td>
       </tr>
 
-    <?php   $count++; //글이 하나 작성 될때마다 카운트++
+    <?php   //$count++; //글이 하나 작성 될때마다 카운트++
   } ?>
 
   </table>

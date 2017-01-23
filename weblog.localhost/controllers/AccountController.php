@@ -191,6 +191,27 @@ class AccountController extends Controller {
     ));
     return $signin_view;
 	}
+
+  // 회원탈퇴하기
+  public function deleteIdAction(){
+    $user_number = $_SESSION['user']['id'];
+    $user_name   = $_SESSION['user']['user_name'];
+    $flag = $this->_connect_model->get('Product')->flagBasket($user_name);
+    $this->_connect_model->get('User')->deleteId($user_number);
+
+    // 회원 장바구니 존재여부 판단
+    if($flag['basket'] == "t"){
+      // echo $flag['basket'];
+      $this->_connect_model->get('Product')->deleteUserBasket($user_name);
+    }
+
+
+    session_destroy();
+    echo "<script>alert('회원탈퇴 하였습니다.')</script>";
+    echo "<script> location.replace('/index.php'); </script>";
+  }
+
+
   public function testAction(){
 
 

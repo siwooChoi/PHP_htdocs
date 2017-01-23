@@ -1,13 +1,14 @@
-/*body{
-  background-color: #green;
-}*/
+body{
+  background-color: black;
+  color: white;
+}
 
 #bodyLine{
  position: absolute;
  top:300px;
  width: 1140px;
  height: 700px;
-  /*background-color: #green;*/
+  background-color: black;
 
   background-image: url("/img/bg/bg5.jpg");
   background-position: bottom;
@@ -16,7 +17,7 @@
 
 .main_product{
   position: absolute;
-  background-color: #green;
+  background-color: black;
 
 }
 

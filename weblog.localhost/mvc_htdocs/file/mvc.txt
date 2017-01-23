@@ -1,0 +1,101 @@
+1. index.php 에서 BlogApp->run()  ___(AppBase의 run)
+
+2. AppBase.php의 run() --> router->getRouteParams(
+					          Request의 getPath()  
+								     );
+
+			   컨트롤러, 액션 정의,   $this->response->send();
+
+
+3. Response.php의 send() --> print $this->_content; ___컨텐츠 출력
+
+
+
+
+
+View객체의 render(파일이름, 파라미터(배열), 템플릿=false) {
+
+	$view = $this->베이스url/파일이름.php
+	
+}
+
+---------------------------------------------------
+Request의  getPath(), Router의 getRouteParams(), Appbase의 run(), Contorller viewFile, path
+---------------------------------------------------
+1. controllers 폴더에서 ~Controller.php 파일을 작성
+
+
+2. BlogApp.php  
+	getRouteDefinition() 안에서 Routing 지정
+
+3. template 애서의 url이 의미하는 것은 ~컨트롤러의 ~액션   이다.
+
+
+	--------- 페이지간의 이동 -----------
+   컨트롤러의 이름을 설정 (BlogApp)
+   [~컨트롤러]의/[~액션] 로 url설정 (template)
+   [~컨트롤러] 와 같은 이름의 폴더, [~액션] 과 같은 이름의 ~.php 파일이 실행이 되는 듯하다. (test폴더의 testsss.php)
+  
+	---------------------------------
+
+
+
+	-------- Model의 sql실행하고 값 가져오기 ---------
+	페이지 --> 컨트롤러 --> Model --> (return으로 값을 반환) --> 컨트롤러 에서 return $this->redirect('/');
+  1> ~컨트롤러로 값을 보낸다. (form action의 url을  "<?php print $base_url; ?>/account/register" 같은 식으로 보낸다.)
+  2> ~컨트롤러에서 _connect_model->get('~~')->sql실행함수 ___ ~~는  ~~Model.php 에서의 ~~이다.
+  3>  2에서 model을 실행할때는 리턴값을 받을 수 있도록 변수를 통해 함수를 실행한다.   ex) $test = $this->_connect_model->get('Test')->testModel_rowCount();
+  4>  2~3 에서 받은 $test를 배열로 만든다. 
+     (애초에 return으로 받아온 값이 배열값이라면 상관없지만, 값이 하나밖에 없는 경우라도 
+		$testValueArray = array($test);
+      같은 방식으로 값을 배열로 만들어준다.)
+  5> ~컨트롤러 안에 있는 Action에서 return $this->render($testValueArray, "사용할 ~.php파일의 이름", "template");
+      과 같이 Controller객체의 render()에   값, 실행할~.php, 템플릿 값을 실어 보낸다.
+  6>  (Controller 객체의 render()에서  값을 받은 후,  이 값을 활용하여 View객체로 값을 보내주도록 되어있다.)
+  7>  6번까지 성공했다면,  ~.php파일의 코드에서   $parameters[0]  처럼 배열을 사용하여 값을 가져올 수 있다.
+
+     ex)  ------------------------------------------------------------------------------
+	 	  if(empty($parameters[0])){
+		    echo "아직 클릭을 안해서 SQL을 실행 안했음. 클릭하면 SQL실행!";
+		  }else{
+		    echo $parameters[0];
+		  }
+          ------------------------------------------------------------------------------
+
+
+	배열형태의 변수값으로 뷰에서 ~.php로 값 넘기기
+	ex) 
+		1> BlogController.php 의 indexAction() 이 있다.
+		2> 
+ 
+
+
+
+
+
+
+        /*  [0] --> Num,  [1] --> Name,   [2] --> Price,   [3] --> comment
+            [4] --> Type,   [5] --> Amount,  --> [6] --> ImgName   [7] --> Detail  */
+
+
+	// $product[i]['p_Number']      // i번째의 번호
+        // $product[i]['p_Name']        // i번째의 이름
+        // $product[i]['p_Price']       // i번째의 가격
+        // $product[i]['p_Comment']     // i번째의 간략한 단어
+        // $product[i]['p_Type']        // i번째의 종류
+        // $product[i]['p_Amount']      // i번째의 가격
+        // $product[i]['p_Imgname']     // i번째의 이미지파일의 이름
+        // $product[i]['p_detail']      // i번째의 상세설명
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 <!-- <form action="./controlor/controlSupport.php?mode=noSearch" method="post"> -->
 
-<link href="/css/basket_css.css" type="text/css" rel="stylesheet">
+<link href="/css/showBasket_css.css" type="text/css" rel="stylesheet">
 
 
     <!-- <form action="./controlor/controlSupport.php?mode=basket" method="post"> -->
@@ -80,7 +80,7 @@
                     </form> -->
                     <form  action="<?php echo $base_url; ?>/product/deleteBasket" method="post">
                       <input type="hidden" name="hidden_b_Number" value="<?php echo $product[$i]['b_Number']; ?>">
-                      <input type="hidden" name="Post_pNumber" value="<?php echo $product[$i]['p_Number']; ?>">
+                      <input type="hidden" name="hidden_p_Number" value="<?php echo $product[$i]['p_Number']; ?>">
                       <input type="submit" value="삭제하기">
                     </form>
                   </td>

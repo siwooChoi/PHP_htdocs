@@ -6,6 +6,18 @@ class UserModel extends ExecuteModel {
     //http://php.net/manual/kr/datetime.format.php
     //DateTime::format
   public function insert($user_name, $password, $nick, $tel, $email) {
+    if($nick == ""){
+      $nick = "닉네임 없음";
+    }
+
+    if($tel == "--"){
+      $tel = "010-0000-0000";
+    }
+
+    if($email == "@"){
+      $email = "none@none";
+    }
+
       $password = password_hash($password,
                                 PASSWORD_DEFAULT);
       $now = new DateTime();
@@ -34,6 +46,11 @@ class UserModel extends ExecuteModel {
                          array(':user_name' => $user_name));
   // getRecord(); 추상 클래스 ExecuteModel의 메소드
       return $userData;
+  }
+
+  public function deleteId($user_number){
+    $sql = "delete from user where id = $user_number";
+    $this->execute($sql);
   }
 
   // ***isOverlapUserName()***

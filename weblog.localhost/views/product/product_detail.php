@@ -1,5 +1,5 @@
 
-           <link href="/css/detail.css" type="text/css" rel="stylesheet">
+           <link href="/css/detail_css.css" type="text/css" rel="stylesheet">
 
               <!-- 상품명 -->
           <div style="font-size:35px;" class="p_name">

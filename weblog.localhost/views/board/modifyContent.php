@@ -16,9 +16,8 @@
             <tr>
                 <td>
                   <form>
-                      <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                      <input name="userfile" type="file" />
-
+                    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                    <input class="myfile" type="file" name="myfile" placeholder="Photo">
                   </form>
                 </td>
             </tr>

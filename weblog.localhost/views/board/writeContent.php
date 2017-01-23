@@ -4,11 +4,11 @@
 
 <p style="text-align:center">글 작성</p>
 
-
   <div class="create_textbox" id="memo_row1">
-    <form  enctype="multipart/form-data" action="<?php echo $base_url; ?>/board/uploadContent" method="post">
+    <form  enctype="multipart/form-data" action="<?php echo $base_url; ?>/board/fileupload?mode=up" method="post">
 
-      <div id="memo_writer"><span >▷ <?php echo $_SESSION['user']['nick']; ?></span></div><br>
+      <div id="memo_writer"><span >▷ <?php echo $_SESSION['user']['user_name']." ( ".$_SESSION['user']['nick']." ) ";
+         ?></span></div><br>
 
       글 제목 : <input style="width:500px" type="text" name="message_name" ><br><br>
       글 내용 <br>
@@ -25,10 +25,12 @@
         <table style="margin-left:35%">
             <tr>
                 <td>
-                  <form>
+                  <!-- <form enctype="multipart/form-data" action="<?php //echo $base_url;?>/board/fileupload" method="POST"> -->
+
                       <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                      <input name="userfile" type="file" />
-                  </form>
+                      <input class="myfile" type="file" name="myfile" placeholder="Photo">
+                      <!-- <input type="submit" name="userfile" value="upload"/> -->
+                  <!-- </form> -->
                 </td>
             </tr>
 
@@ -39,6 +41,7 @@
               <td>
 
                 <input class="upb1" type="submit" value="작성하기">
+
               </td>
 
     </form>

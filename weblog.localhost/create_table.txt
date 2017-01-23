@@ -41,6 +41,9 @@ CREATE TABLE status(
     message_text text,
     time_stamp DATETIME,
     PRIMARY KEY(id),
+    file_name varchar(100),
+    file_path varchar(255),
+    file_size varchar(255),
     INDEX user_id_index(user_id)
 ) ENGINE = INNODB;
 

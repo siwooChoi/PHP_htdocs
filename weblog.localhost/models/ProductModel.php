@@ -31,6 +31,35 @@ class ProductModel extends ExecuteModel {
     return $productArray;
   }
 
+  // 관리자가 상품 등록하기
+  public function adminUploadProduct($up_p_values){
+    $sql = "insert into product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail)
+                      VALUES(:p_name, :p_price, :p_comment, :p_type, :p_amount, :p_imgname, :p_detail)";
+
+      // echo $up_p_values[0]; echo "<br>";
+      // echo $up_p_values[1];echo "<br>";
+      // echo $up_p_values[2];echo "<br>";
+      // echo $up_p_values[3];echo "<br>";
+      // echo $up_p_values[4];echo "<br>";
+      // echo $up_p_values[5];echo "<br>";
+      // echo $up_p_values[6];echo "<br>";
+
+    $this->execute($sql, array(
+                        ':p_name'=>$up_p_values[0],
+                        ':p_price'=>$up_p_values[1],
+                        ':p_comment'=>$up_p_values[2],
+                        ':p_type'=>$up_p_values[3],
+                        ':p_amount'=>$up_p_values[4],
+                        ':p_imgname'=>$up_p_values[5],
+                        ':p_detail'=>$up_p_values[6]
+                      ));
+  }
+
+  // 관리자가 상품삭제하기
+  public function admindeleteProduct($p_Number){
+    $sql = "delete from product where p_Number = $p_Number";
+    $this->execute($sql);
+  }
   // 해당 아이디에 장바구니가 존재하는지 여부 검사
   public function flagBasket($user_name){
     $sql = "select basket from user where user_name = :user_name";
@@ -110,6 +139,13 @@ class ProductModel extends ExecuteModel {
     $this->execute($sql, array(':pnum' => $pnum,
                                ':bnum' => $bnum)
                     );
+  }
+
+  // 회원탈퇴 시 장바구니 삭제
+  public function deleteUserBasket($user_name){
+    $user_name_basket = $user_name."_basket";
+    $sql = "drop table $user_name_basket";
+    $this->execute($sql);
   }
 
   // 물품구매하기

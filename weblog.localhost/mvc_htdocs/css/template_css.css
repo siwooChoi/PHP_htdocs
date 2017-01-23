@@ -15,7 +15,7 @@ body{
   position: absolute;
   width: 1140px;
   height:200px;
-  background-color: blue;
+  /*background-color: white;*/
 }
 
 /*로고*/
@@ -33,7 +33,7 @@ body{
  left:240px;
  width: 650px;
  height:200px;
- background-color: red;
+ /*background-color: red;*/
  /*background-image:url('/img/bg/bg4.jpg');*/
  background-position:left;
 }
@@ -44,7 +44,7 @@ body{
    left:890px;
    width:250px;
    height: 200px;
-   background-color: red;
+   /*background-color: red;*/
    /*color:white;*/
  }
 

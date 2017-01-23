@@ -55,6 +55,13 @@ Weblog
 						</a>
 						<?php
 					}?>
+					<!-- <a href="<?php print $base_url; ?>/test/test1">
+						<div class='menulist'> 파일테스트1 </div>
+					</a>
+
+					<a href="<?php print $base_url; ?>/test/test2">
+						<div class='menulist'> 파일테스트2 </div>
+					</a> -->
 			</div>
 
 		<?php //else: ?>

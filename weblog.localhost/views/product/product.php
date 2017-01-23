@@ -93,9 +93,8 @@
        if(isset($_SESSION['user']['user_name']) && $_SESSION['user']['user_name'] == "admin"){ ?>
         <tr>
           <td>
-            <form action="./index.php?product_delete=
-                          <?php  echo $product[$i]['p_Number']; ?>~
-                          <?php  echo $product[$i]['p_Name']; ?>" method="post">
+            <form action="<?php echo $base_url; ?>/product/admindeleteProduct" method="post">
+              <input type="hidden" name="deleteNumber" value="<?php  echo $product[$i]['p_Number']; ?>">
               <input type="submit" value="판매정보 삭제">
             </form>
           </td>

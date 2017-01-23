@@ -47,6 +47,31 @@
     <!-- 빈공간 -->
   </td>
 </tr>
+<tr>
+  <td><!-- 빈공간 --></td>
+<td>
+  <!-- 다운로드파일 목록 -->
+  <a href="<?php echo $base_url; ?>/board/pageNumforDownload?page=<?php echo $content[0]['id']; ?>">
+  <?php
+
+    echo $content[0]['file_name']
+   ?>
+
+</td>
+<td><?php
+  if($content[0]['file_size'] != ""){
+    $file_size = $content[0]['file_size'] / 1025;
+  } else{
+    $file_size = "없음";
+  }
+  if($file_size == "0"){
+    $file_size = "파일없음";
+  }
+  echo $file_size;
+
+?>
+</td>
+</tr>
   </table>
 
   <table >
@@ -98,4 +123,5 @@
 //   var_dump($_SESSION['userfile']);  echo "<br>";
 
   echo "<br><br><br>";
+
 ?>
