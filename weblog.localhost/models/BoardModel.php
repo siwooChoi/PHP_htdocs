@@ -9,7 +9,6 @@ class BoardModel extends ExecuteModel {
     return $boardRowCount;
   }
 
-
   // 게시판 글목록 보기
   public function contentBoard(){
     $boardArray = array();
@@ -37,8 +36,16 @@ class BoardModel extends ExecuteModel {
 
   // 글작성페이지에서 글작성 후 작성된 글 업로드
   public function uploadContent($file_name = null, $file_path = null, $file_size = null){
+
+    if($_POST['message_name'] == ""){
+      $message_name = "제목 없음";
+    } else {
+      $message_name = $_POST['message_name'];
+    }
+
     $regist_day = new DateTime();
     $regist_day = $regist_day->format('Y-m-d h:i:s');
+
 
     $sql = "insert into status(user_id, user_name, user_nick, message_name, message_text, time_stamp, file_name, file_path, file_size)
                       VALUES(:user_id, :user_name, :user_nick, :message_name, :message_text, :time_stamp, :file_name, :file_path, :file_size)";
@@ -46,7 +53,7 @@ class BoardModel extends ExecuteModel {
                         ':user_id'=>$_SESSION['user']['id'],
                         ':user_name'=>$_SESSION['user']['user_name'],
                         ':user_nick'=>$_SESSION['user']['nick'],
-                        ':message_name'=>$_POST['message_name'],
+                        ':message_name'=>$message_name,
                         ':message_text'=>$_POST['message_text'],
                         ':time_stamp'=>$regist_day,
                         ':file_name' => $file_name,

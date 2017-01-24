@@ -1,7 +1,8 @@
 <?php
 if(!isset($_SESSION['user']['user_name'])){
   echo "<script>alert('로그인 후 이용하실 수 있습니다..')</script>";
-  echo "<script> history.go(-1); </script>";
+  // echo "<script> history.go(-1); </script>";
+  echo "<script>location.replace('/account/signin')</script>";
 } else{
   ?>
   <link href="/css/contentBoard_css.css" type="text/css" rel="stylesheet">

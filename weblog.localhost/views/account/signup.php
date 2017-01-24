@@ -1,7 +1,7 @@
 <?php $this->setPageTitle('title', '계정 생성') ?>
-<link href="/css/createUser_css.css" type="text/css" rel="stylesheet">
-<form action="<?php print $base_url; ?>/account/register"
-      method="post">
+<?php print $this->escape($_token); ?>
+<link href="/css/signup_css.css" type="text/css" rel="stylesheet">
+<form class="signupmain" action="<?php print $base_url; ?>/account/register" method="post">
 	<input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>" />
 
            <!-- View클래스의 escape() -->
@@ -25,7 +25,7 @@
   <table class="createUser_table">
     <tr>
       <td>
-  
+
   I D <input class="createUserbox1" type="text" name="user_name">
          <!-- <input type="button" name="checkId" value="중복확인" onclick="Script_checkid()"> -->
           <br>

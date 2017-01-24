@@ -135,7 +135,8 @@ class AccountController extends Controller{
       //http://php.net/manual/en/function.password-hash.php
       //http://php.net/manual/en/function.password-verify.php
       if(!$user || (!password_verify($password, $user['password']))){
-    // password_hash() : _문자열을 암호화_ 와 password_verify() : _암호화된 패스워드를 다시 정상으로_는 쌍으로 사용한다.
+        // password_hash() : _문자열을 암호화_ 와 password_verify() :
+    // _암호화된 패스워드를 다시 정상으로_는 쌍으로 사용한다.
 
         $errors[]='인증 에러임';
       }else{

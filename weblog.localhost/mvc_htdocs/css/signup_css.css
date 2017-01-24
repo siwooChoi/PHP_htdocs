@@ -1,17 +1,19 @@
 
 body{
-
   background-color: black;
-  background-image: url("/img/bg/bg8.jpg");
-  background-size: 100%, 100%;
-  background-repeat: no-repeat;
   color:white;
-
 }
 
+.signupmain{
+  background-image: url("/img/bg/bg8.jpg");
+  /*background-size: 100%, 100%;*/
+  background-repeat: no-repeat;
+  background-position: top;
+}
 .createUser_title{
   border: 1px solid white;
   /*margin-top: 150px;*/
+
   width:400px;
   height:20px;
   margin-left: 190px;

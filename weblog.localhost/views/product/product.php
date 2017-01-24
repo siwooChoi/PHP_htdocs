@@ -8,7 +8,7 @@
       // echo $rowCount = $parameters[0]."<br>";
 
       if(empty($product)){
-          echo "값이 아직 없다<br>";
+          echo "검색 결과가 없습니다.<br>";
           // var_dump($product[0]['p_Name']);
           // echo "<br>";
           // echo count($product);
@@ -34,13 +34,14 @@
         if($i % 3 == 0){ echo "<tr>"; }
         ?>
 
-        <form action="<?php print $base_url;?>/product/basket" method="post">
+        <form action="<?php print $base_url;?>/product/buyORbasket" method="post">
   <td width=33%>  <!-- 각각의 큰 틀 -->
     <p style='text-align:center'><?php  echo $product[$i]['p_Name']; ?>
     </p>  <!-- 메인 상품명 -->
       <table border="solid white 5px" style="width:350px" >
         <tr>
           <td>
+            
               <a href='<?php echo $base_url; ?>/product/productdetail?number=<?php echo $product[$i]['p_Number']; ?>'>
                 <img width="200px" height="200px" src='/img/<?php echo $product[$i]['p_Imgname'];  ?>' >
                 <input type="hidden" name="Post_pNumber" value="<?php  echo $product[$i]['p_Number']; ?>">
@@ -52,6 +53,7 @@
                 <input type="hidden" name="Post_pImgname" value="<?php  echo $product[$i]['p_Imgname']; ?>">
                 <input type="hidden" name="Post_pDetail" value="<?php  echo $product[$i]['p_detail']; ?>">
                 <input type="hidden" name="rowCount" value="<?php  echo $this->rowCount; ?>">
+                <input type="hidden" name="Post_amount" value="1">
                 <input type="hidden" name="row" value="<?php echo $this->productValuesArray; ?>">
 
               </a>
@@ -72,30 +74,39 @@
               <tr><td>
 
 <?php if( isset($_SESSION['user']['user_name']) && $_SESSION['user']['user_name'] != "admin") { ?>
-              <input type="submit" value="장바구니">
+              <input type="submit" name="submit" value="장바구니">
   <?php } ?>
-            </form>
+
           </td>
 
 
 <?php       if( isset($_SESSION['user']['user_name']) && $_SESSION['user']['user_name'] != "admin"){ ?>
           <td>
-            <form action="<?php echo $base_url; ?>/product/buyProduct" method="post">
               <input type="hidden" name="Post_pName" value="<?php  echo $product[$i]['p_Name']; ?>">
               <input type="hidden" name="Post_pNumber" value="<?php  echo $product[$i]['p_Number']; ?>">
-              <input type="submit" value="구매하기">
+              <input type="submit" name="submit" value="구매하기">
             </form>
+
           </td>
           </td>
         </tr>
 <?php }
 
        if(isset($_SESSION['user']['user_name']) && $_SESSION['user']['user_name'] == "admin"){ ?>
+       </form>
         <tr>
           <td>
-            <form action="<?php echo $base_url; ?>/product/admindeleteProduct" method="post">
-              <input type="hidden" name="deleteNumber" value="<?php  echo $product[$i]['p_Number']; ?>">
-              <input type="submit" value="판매정보 삭제">
+            <form action="<?php echo $base_url; ?>/product/delORmodify" method="post">
+              <input type="hidden" name="Post_pNumber" value="<?php  echo $product[$i]['p_Number']; ?>">
+              <input type="hidden" name="Post_pName" value="<?php  echo $product[$i]['p_Name']; ?>">
+              <input type="hidden" name="Post_pPrice" value="<?php  echo $product[$i]['p_Price']; ?>">
+              <input type="hidden" name="Post_pComment" value="<?php  echo $product[$i]['p_Comment']; ?>">
+              <input type="hidden" name="Post_pType" value="<?php  echo $product[$i]['p_Type']; ?>">
+              <input type="hidden" name="Post_pAmount" value="<?php  echo $product[$i]['p_Amount']; ?>">
+              <input type="hidden" name="Post_pImgname" value="<?php  echo $product[$i]['p_Imgname']; ?>">
+              <input type="hidden" name="Post_pDetail" value="<?php  echo $product[$i]['p_detail']; ?>">
+              <td><input type="submit" name="submit" value="정보수정"></td>
+              <td><input type="submit" name="submit" value="상품삭제"></td>
             </form>
           </td>
         </tr>

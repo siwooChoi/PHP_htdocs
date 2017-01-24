@@ -5,7 +5,7 @@
 <p style="text-align:center">글 작성</p>
 
   <div class="create_textbox" id="memo_row1">
-    <form  enctype="multipart/form-data" action="<?php echo $base_url; ?>/board/fileupload?mode=up" method="post">
+    <form  enctype="multipart/form-data" action="<?php echo $base_url; ?>/board/fileupload" method="post">
 
       <div id="memo_writer"><span >▷ <?php echo $_SESSION['user']['user_name']." ( ".$_SESSION['user']['nick']." ) ";
          ?></span></div><br>

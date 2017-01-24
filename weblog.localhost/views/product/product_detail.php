@@ -85,23 +85,10 @@
 
 
 <?php if( isset($_SESSION['user']['user_name']) && $_SESSION['user']['user_name'] != "admin"){ ?>
-          <div style="" class='detail_buy'>
-              <form action="<?php echo $base_url; ?>/product/buyProduct" method="post">
-                <input type="hidden" name="Post_pNumber" value="<?php  echo $product[0]['p_Number']; ?>">
-                <input type="hidden" name="Post_pName" value="<?php  echo $product[0]['p_Name']; ?>">
-                <input type="hidden" name="Post_pPrice" value="<?php  echo $product[0]['p_Price']; ?>">
-                <input type="hidden" name="Post_pComment" value="<?php  echo $product[0]['p_Comment']; ?>">
-                <input type="hidden" name="Post_pType" value="<?php  echo $product[0]['p_Type']; ?>">
-                <input type="hidden" name="Post_pAmount" value="<?php  echo $product[0]['p_Amount']; ?>">
-                <input type="hidden" name="Post_pImgname" value="<?php  echo $product[0]['p_Imgname']; ?>">
-                <input type="hidden" name="Post_pDetail" value="<?php  echo $product[0]['p_detail']; ?>">
-                <input type="submit" value="구매하기">
-              </form>
-          </div>
 
           <div  class='detail_basket'>
-              <form action="<?php echo $base_url; ?>/product/basket" method="post">
-                <input type="submit" value="장바구니">
+              <form action="<?php echo $base_url; ?>/product/buyORbasket" method="post">
+
                 <input type="hidden" name="Post_pNumber" value="<?php  echo $product[0]['p_Number']; ?>">
                 <input type="hidden" name="Post_pName" value="<?php  echo $product[0]['p_Name']; ?>">
                 <input type="hidden" name="Post_pPrice" value="<?php  echo $product[0]['p_Price']; ?>">
@@ -110,15 +97,30 @@
                 <input type="hidden" name="Post_pAmount" value="<?php  echo $product[0]['p_Amount']; ?>">
                 <input type="hidden" name="Post_pImgname" value="<?php  echo $product[0]['p_Imgname']; ?>">
                 <input type="hidden" name="Post_pDetail" value="<?php  echo $product[0]['p_detail']; ?>">
-
+                <input type="text" name="Post_amount" style=" width:50px" value="1" >
+                <input type="submit" name="submit" value="장바구니">
+                <input type="submit" name="submit" value="구매하기">
               </form>
           </div>
-<?php } ?>
-<?php if(isset($_SESSION['userid']) && $_SESSION['userid'] == "admin"){ ?>
 
-      <form action="" method="post">
-        <input type="submit" value="판매정보 삭제">
+
+<?php } ?>
+<?php if(isset($_SESSION['user']['user_name']) && $_SESSION['user']['user_name'] == "admin"){ ?>
+
+  <div  class='detail_admin_basket'>
+      <form action="<?php echo $base_url; ?>/product/delORmodify" method="post">
+        <input type="hidden" name="Post_pNumber" value="<?php  echo $product[0]['p_Number']; ?>">
+        <input type="hidden" name="Post_pName" value="<?php  echo $product[0]['p_Name']; ?>">
+        <input type="hidden" name="Post_pPrice" value="<?php  echo $product[0]['p_Price']; ?>">
+        <input type="hidden" name="Post_pComment" value="<?php  echo $product[0]['p_Comment']; ?>">
+        <input type="hidden" name="Post_pType" value="<?php  echo $product[0]['p_Type']; ?>">
+        <input type="hidden" name="Post_pAmount" value="<?php  echo $product[0]['p_Amount']; ?>">
+        <input type="hidden" name="Post_pImgname" value="<?php  echo $product[0]['p_Imgname']; ?>">
+        <input type="hidden" name="Post_pDetail" value="<?php  echo $product[0]['p_detail']; ?>">
+        <input type="submit" name="submit" value="정보수정">
+        <input type="submit" name="submit" value="상품삭제">
       </form>
+  </div>
 
 <?php }?>
 

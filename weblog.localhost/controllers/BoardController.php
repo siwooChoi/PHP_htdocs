@@ -30,7 +30,7 @@ class BoardController extends Controller{
 
   // 글제목 검색
   public function searchContentAction(){
-    $search = "%".$_POST['searchContent']."%";
+    $search = "%".$this->_request->getPost('searchContent')."%";
 
 
     $this->boardValues = $this->_connect_model->
@@ -43,16 +43,10 @@ class BoardController extends Controller{
 
   // 글작성페이지에서 글작성 후 업로드
   public function uploadContentAction($file_name = null, $file_path = null, $file_size = null){
-    $message_name = $_POST['message_name'];
-    $message_text = $_POST['message_text'];
 
+      $this->boardRowCount = $this->_connect_model->get('Board')->uploadContent($file_name, $file_path, $file_size);
+      $this->redirect('/board/contentBoard');
 
-    if ($message_name == "") {
-      echo "<script>alert('제목을 기입해주세요.')</script>";
-      return $this->render(array('messaged' => $message_text), "writeContent", "template");
-    }
-    $this->boardRowCount = $this->_connect_model->get('Board')->uploadContent($file_name, $file_path, $file_size);
-    $this->redirect('/board/contentBoard');
 
   }
 

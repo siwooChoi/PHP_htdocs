@@ -9,19 +9,34 @@ body{
 
 }
 
-
-
+/*상품정보수정*/
 .product_ptag{
   position: absolute;
-  /*top:110px;*/
-  left:270px;
+  /*top:-20px;*/
+  left:280px;
 }
+
+
+.show_img{
+  position: absolute;
+  top:70px;
+  left:60px;
+}
+
+.show_img_name{
+  position: absolute;
+  top:260px;
+  left:130px;
+
+}
+
 
 .product_table{
   position: absolute;
-  top:50px;
-  left:190px;
+  top:70px;
+  left:350px;
 }
+
 
 .p_img{
   position: absolute;

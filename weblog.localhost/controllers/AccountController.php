@@ -14,6 +14,9 @@ class AccountController extends Controller {
 
   public function signupAction() {
     if ($this->_session->isAuthenticated()) {
+      // 여기서는 $this->_session 이 보이지 않는다.
+      // 이 $this가 가리키는 것은 상속받고 있는 'Controller'
+
       $this->redirect('/account');
     }
     $signup_view = $this->render(array(
@@ -42,10 +45,11 @@ class AccountController extends Controller {
         $this->redirect('/account');
       }
       //2>CSRF대책의 Token 체크
-      $token = $this->_request->getPost('_token');
-      if (!$this->checkToken(self::SIGNUP,
-                             $token)
-      ){
+      $token = $this->_request->getPost('_token');// view의 hidden 으로 넘어오는 값
+      if (!$this->checkToken(self::SIGNUP, $token)){
+  // 로그인을 필요로하는 페이지에서 토큰을 체크  true false 반환 ,  비정상접근 일 경우 false 인데
+  // $this 앞에 !가 있어서  true로 바뀌고   아래쪽 redirect 실행.
+
         return $this->redirect('/' . self::SIGNUP);
       }
       //3>POST 전송방식으로 전달 받은 데이터를 변수에 저장
@@ -53,9 +57,9 @@ class AccountController extends Controller {
       $password  = $this->_request->getPost('password');
       $password2  = $this->_request->getPost('password2');
       $nick = $this->_request->getPost('nick');
-        $tel1 = $this->_request->getPost('tel1');
-        $tel2 = $this->_request->getPost('tel2');
-        $tel3 = $this->_request->getPost('tel3');
+       $tel1 = $this->_request->getPost('tel1');
+       $tel2 = $this->_request->getPost('tel2');
+       $tel3 = $this->_request->getPost('tel3');
       $tel = $tel1."-".$tel2."-".$tel3;
 
         $email1 = $this->_request->getPost('email1');
@@ -251,11 +255,14 @@ class AccountController extends Controller {
 			$user = $this->_connect_model
                    ->get('User')  // get('User') --> UserModel.php 를 의미.
                                   // get('Following') --> FollowingModel.php,
-                                  // BlogController의 get('Status') 는 StatusModel.php 를 의미.
+                                  // BlogController의 get('Status') 는 StatusModel.php 를 의미
                    ->getUserRecord($user_name);
 
       if (!$user
           || (!password_verify($password, $user['password']))
+  // password_hash() : _문자열을 암호화_    와
+  // password_verify() : _암호화된 패스워드를 다시 정상으로_
+  //                     는 쌍으로 사용한다.
 			){
  	     	$errors[] = '로그인 실패';
       } else {
@@ -265,11 +272,8 @@ class AccountController extends Controller {
              ->set('user', $user);
 
         // 로그인 후 바로 보여지는 경로
-        $result=$this->redirect('/product/product');
+        $result = $this->redirect('/product/product');
       }
-      // print"<br>?????????????????????????<br>";
-      // var_dump($result);
-      // print"<br>?????????????????????????<br>";
 
     }
 
