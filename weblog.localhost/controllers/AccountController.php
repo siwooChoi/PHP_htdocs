@@ -160,10 +160,6 @@ class AccountController extends Controller {
              ->get('product')
              ->createBuyList($user_name);
 
-       $this->_connect_model
-            ->get('product')
-            ->createBuyList($user_name);
-
              //세션ID재생성
         $this->_session
              ->setAuthenticateStaus(true);
@@ -283,7 +279,7 @@ class AccountController extends Controller {
     // if($flag['basket'] == "t"){
       // echo $flag['basket'];
       $this->_connect_model->get('Product')->deleteUserBasket($user_name);
-      $this->_connect_model->get('Product')->deleteUserBuyL($user_name);
+      $this->_connect_model->get('Product')->deleteUserBuyList($user_name);
     // }
 
     session_destroy();

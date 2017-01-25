@@ -225,7 +225,7 @@ class ProductModel extends ExecuteModel {
 
   // 구매이력 테이블 만들기
   public function createBuyList($user_name){
-    $user_name_basket = $user_name."_basket";
+    $user_name_buylist = $user_name."_buylist";
     // echo "$user_name_basket"."<br><br>";
 
     $sql = "create table $user_name_buylist (
