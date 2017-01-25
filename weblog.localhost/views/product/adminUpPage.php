@@ -1,5 +1,5 @@
 
-<link href="/css/adminUpPage_css.css" type="text/css" rel="stylesheet">
+<link href="/css/adminUpPage.css" type="text/css" rel="stylesheet">
 
 <!DOCTYPE html>
 <html>
@@ -40,10 +40,12 @@
 
 
               <br>
+              <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
               <input class="upload_button" type="submit" value="등록하기">
             </form>
 
             <form action="<?php echo $base_url; ?>/product/product" method="post">
+              <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
               <input class="cancel_button" type="submit" value="돌아가기">
           </td>
         </tr>

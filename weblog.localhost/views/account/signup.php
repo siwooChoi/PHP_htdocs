@@ -1,5 +1,5 @@
 <?php $this->setPageTitle('title', '계정 생성') ?>
-<?php print $this->escape($_token); ?>
+<?php //print "(signup.php 에서의 2번라인 escape(_token): ".$this->escape($_token); ?>
 <link href="/css/signup_css.css" type="text/css" rel="stylesheet">
 <form class="signupmain" action="<?php print $base_url; ?>/account/register" method="post">
 	<input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>" />

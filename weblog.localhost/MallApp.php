@@ -57,7 +57,7 @@ class MallApp extends AppBase {
         '/product/:action'   => array('controller' => 'product'),
 
         // BoardController  클래스 관련 Routing
-        '/board/:action'   => array('controller' => 'board'),
+        '/board/:action'   => array('controller' => 'board', 'action' => ':action'),
         // '/board/:action/page:'   => array('controller' => 'board', 'action' => 'download'),
 
       );

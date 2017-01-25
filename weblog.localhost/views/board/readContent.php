@@ -91,6 +91,7 @@
       <input type="hidden" name="content_name" value="<?php  echo $content[0]['message_name']; ?>">
       <input type="hidden" name="content_text" value="<?php  echo $content[0]['message_text']; ?>">
       <input type="hidden" name="content_timeStamp" value="<?php  echo $content[0]['time_stamp']; ?>">
+      <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
 
 
       <input class="read_modi" type="submit" value="수정하기">
@@ -99,6 +100,7 @@
     <td>
       <form  action="<?php echo $base_url; ?>/board/deleteBoard" method="post">
         <input type="hidden" name="hidden_Contentdelete" value="<?php echo $content[0]['id']; ?>">
+        <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
         <input class="read_dele" type="submit" value="삭제하기">
       </form>
     </td>
@@ -111,6 +113,7 @@
     <td>
 
       <form  action="<?php echo $base_url; ?>/board/contentBoard" method="post">
+        <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
         <input class="read_back" type="submit" value="목록으로">
       </form>
     </td>

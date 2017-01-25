@@ -73,7 +73,7 @@
                       <input type="hidden" name="Post_pNumber" value="<?php echo $basket[$i]['p_Number']; ?>">
                       <input type="hidden" name="Post_pName" value="<?php  echo $basket[$i]['p_Name']; ?>">
                       <input type="hidden" name="Post_bAmount" value="<?php  echo $basket[$i]['p_Amount']; ?>">
-
+                      <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
                       <input type="submit" name="submit" value="구매하기">
                     </form>
                   </td>
@@ -84,6 +84,7 @@
                     <form  action="<?php echo $base_url; ?>/product/deleteBasket" method="post">
                       <input type="hidden" name="hidden_b_Number" value="<?php echo $basket[$i]['b_Number']; ?>">
                       <input type="hidden" name="hidden_p_Number" value="<?php echo $basket[$i]['p_Number']; ?>">
+                      <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
                       <input type="submit" value="삭제하기">
                     </form>
                   </td>
@@ -92,7 +93,7 @@
                     </td>
                     <td>
                       <?php $regi = substr($basket[$i]['regist_day'], 0, 10 ); ?>
-                     장바구니에 담은 날짜 <?php echo $regi; ?>
+                     장바구니에 담은 날짜 : <?php echo $regi; ?>
                     </td>
 
                   </td>

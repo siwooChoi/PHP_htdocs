@@ -1,6 +1,8 @@
 <?php
 class BoardController extends Controller{
 
+  const BOARD = '/';
+
   const POST = 'board/post';
   public $boardValues;
   public $boardRowCount;
@@ -11,32 +13,46 @@ class BoardController extends Controller{
     $this->boardRowCount = $this->_connect_model->get('Board')->checkRowCount();
 
     if($this->boardRowCount == 0){
-      $board_view = $this->render();
+      $board_view = $this->render(array('_token'  => $this->getToken(self::BOARD)));
       return  $board_view;
 
     } else{
       $this->boardValues = $this->_connect_model->
         get('Board')->contentBoard();
 
-      $board_view = $this->render(array('content' => $this->boardValues), "contentBoard", "template");
+      $board_view = $this->render(array('content' => $this->boardValues,
+                                        '_token'  => $this->getToken(self::BOARD)),
+                                   "contentBoard", "template");
       return $board_view;
     }
   }
 
   // 글작성페이지로 이동
   public function writeContentAction(){
-    return $this->render(array(), "writeContent", "template");
+    return $this->render(array('_token' => $this->getToken(self::BOARD)),
+                          "writeContent", "template");
   }
 
   // 글제목 검색
   public function searchContentAction(){
     $search = "%".$this->_request->getPost('searchContent')."%";
 
+    // 토큰 확인
+    $token = $this->_request->getPost('_token');
+
+          if (!$this->checkToken(self::BOARD, $token)){
+            // 로그인을 필요로하는 페이지에서 토큰을 체크  true false 반환 ,  비정상접근 일 경우 false 인데
+            // $this 앞에 !가 있어서  true로 바뀌고   아래쪽 redirect 실행.
+
+            return $this->redirect(self::BOARD );
+          }
+
 
     $this->boardValues = $this->_connect_model->
       get('Board')->searchContent($search);
 
-    $board_view = $this->render(array('content' => $this->boardValues), "contentBoard", "template");
+    $board_view = $this->render(array('content' => $this->boardValues,
+                                      '_token'  => $this->getToken(self::BOARD)), "contentBoard", "template");
     return $board_view;
 
   }
@@ -46,18 +62,20 @@ class BoardController extends Controller{
 
       $this->boardRowCount = $this->_connect_model->get('Board')->uploadContent($file_name, $file_path, $file_size);
       $this->redirect('/board/contentBoard');
-
-
   }
 
   // 해당게시판 열람하기
   public function openBoardAction(){
     $pageNum = $this->_request->getGet('page');
 
+    $token = $this->_request->getPost('_token');
+
+
     $PageValues = $this->_connect_model->
       get('Board')->PageContentBoard($pageNum);
 
-    $content_view = $this->render(array('content' => $PageValues), "readContent", "template");
+    $content_view = $this->render(array('content' => $PageValues, '_token'  => $this->getToken(self::BOARD)),
+                                  "readContent", "template");
     return $content_view;
   }
 
@@ -69,7 +87,9 @@ class BoardController extends Controller{
       get('Board')->PageContentBoard($pageNum);
 
 
-    $content_view = $this->render(array('content' => $pageValues), "modifyContent", "template");
+    $content_view = $this->render(array('content' => $pageValues,
+                                        '_token'  => $this->getToken(self::BOARD)),
+                                "modifyContent", "template");
     return $content_view;
   }
 
@@ -91,6 +111,16 @@ class BoardController extends Controller{
     $file['fpath'] = './file/'.$file['fname'];
     // $file['fpath'] = './img/'.$file['fname'];
     $file['allowed_ext'] = array('JPG','jpg','jpeg','png','gif','txt');
+
+    // 토큰 확인
+    $token = $this->_request->getPost('_token');
+
+    if (!$this->checkToken(self::BOARD, $token)){
+      // 로그인을 필요로하는 페이지에서 토큰을 체크  true false 반환 ,  비정상접근 일 경우 false 인데
+      // $this 앞에 !가 있어서  true로 바뀌고   아래쪽 redirect 실행.
+
+      return $this->redirect(self::BOARD );
+    }
 
     // 오류 확인
     if( $file['error'] != UPLOAD_ERR_OK ) {
@@ -145,6 +175,16 @@ class BoardController extends Controller{
   // 글삭제 하기
   public function deleteBoardAction(){
 
+    // 토큰 확인
+    $token = $this->_request->getPost('_token');
+
+          if (!$this->checkToken(self::BOARD, $token)){
+            // 로그인을 필요로하는 페이지에서 토큰을 체크  true false 반환 ,  비정상접근 일 경우 false 인데
+            // $this 앞에 !가 있어서  true로 바뀌고   아래쪽 redirect 실행.
+
+            return $this->redirect(self::BOARD );
+          }
+
     $pageNum = $this->_request->getPost('hidden_Contentdelete');
 
     $this->_connect_model->
@@ -170,6 +210,16 @@ class BoardController extends Controller{
           // $file['fpath'] = './img/'.$file['fname'];
           $file['allowed_ext'] = array('JPG','jpg','jpeg','png','gif','txt');
 
+          // 토큰 확인
+          $token = $this->_request->getPost('_token');
+
+
+          if (!$this->checkToken(self::BOARD, $token)){
+            // 로그인을 필요로하는 페이지에서 토큰을 체크  true false 반환 ,  비정상접근 일 경우 false 인데
+            // $this 앞에 !가 있어서  true로 바뀌고   아래쪽 redirect 실행.
+
+            return $this->redirect(self::BOARD );
+          }
           // 오류 확인
           if( $file['error'] != UPLOAD_ERR_OK ) {
               switch( $file['error'] ) {
@@ -206,7 +256,7 @@ class BoardController extends Controller{
   }
 
 
-  // 파일 다운로드 (get 페이지넘버 and downloadAction으로 넘버보내기)
+  // 파일 다운로드1 (get 페이지넘버 and downloadAction으로 넘버보내기)
   public function pageNumforDownloadAction(){
     $pageNum = $this->_request->getGet('page');
     // echo $pageNum;
@@ -219,7 +269,7 @@ class BoardController extends Controller{
 
   }
 
-  // 파일 다운로드 (pageNumforDownloadAction 로부터 받은 페이지넘버에 다운로드)
+  // 파일 다운로드2 (pageNumforDownloadAction 로부터 받은 페이지넘버에 다운로드)
   public function downloadAction($par){
         // $pageNum = $this->_request->getGet('page');
 

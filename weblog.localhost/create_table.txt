@@ -81,6 +81,31 @@ INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_d
 INSERT INTO product(p_Name, p_Price, p_Comment, p_Type, p_Amount, p_Imgname, p_detail) VALUES('토닉워터', 700, '칵테일용 탄산수', '주스및기타', 900 , 'Tonic.jpg', '상세설명 기입란');
 
 
+  -- 장바구니 , 구매이력 테이블 만들기 --
+ create table $user_name_basket (
+          b_Number int AUTO_INCREMENT,
+          p_Number int,
+          p_Name varchar(30) not null,
+          p_Price int not null,
+          p_Comment varchar(40),
+          p_Type varchar(15),
+          p_Amount int not null,
+          p_Imgname varchar(40),
+          regist_day char(20),
+          primary key(b_Number)
+        )
+
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE followinguser(
     user_id INTEGER,
     following_id INTEGER,

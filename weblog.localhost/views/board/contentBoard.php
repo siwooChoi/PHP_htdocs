@@ -17,6 +17,7 @@ if(!isset($_SESSION['user']['user_name'])){
     <tr><td>
       <form action="<?php echo $base_url; ?>/board/searchContent" method="post">
         <input style="text-align:right;" name="searchContent" type="text" value="">
+        <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
         <input type="submit" value="검색">
       </form>
     </tr><td/>
@@ -68,6 +69,7 @@ if(!isset($_SESSION['user']['user_name'])){
           <input type="hidden" name="content_name" value="<?php  echo $content[$i]['message_name']; ?>">
           <input type="hidden" name="content_text" value="<?php  echo $content[$i]['message_text']; ?>">
           <input type="hidden" name="content_timeStamp" value="<?php  echo $content[$i]['time_stamp']; ?>">
+          <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
           <input class="createcon" type="submit" value="글 작성">
         </form>
         <?php } ?>

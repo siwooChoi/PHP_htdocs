@@ -77,7 +77,7 @@
               <table border="solid black 1px" style="width:450px; height:150px" >
                 <tr>
                   <td>
-                    <?php echo $product[0]['p_detail'] ?><br>
+                    <h3 style="text-align:center"><?php echo $product[0]['p_detail'] ?></h3><br>
                   </td>
                 </tr>
               </table>
@@ -98,6 +98,7 @@
                 <input type="hidden" name="Post_pImgname" value="<?php  echo $product[0]['p_Imgname']; ?>">
                 <input type="hidden" name="Post_pDetail" value="<?php  echo $product[0]['p_detail']; ?>">
                 <input type="text" name="Post_amount" style=" width:50px" value="1" >
+                <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
                 <input type="submit" name="submit" value="장바구니">
                 <input type="submit" name="submit" value="구매하기">
               </form>
@@ -117,6 +118,7 @@
         <input type="hidden" name="Post_pAmount" value="<?php  echo $product[0]['p_Amount']; ?>">
         <input type="hidden" name="Post_pImgname" value="<?php  echo $product[0]['p_Imgname']; ?>">
         <input type="hidden" name="Post_pDetail" value="<?php  echo $product[0]['p_detail']; ?>">
+        <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
         <input type="submit" name="submit" value="정보수정">
         <input type="submit" name="submit" value="상품삭제">
       </form>

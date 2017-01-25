@@ -1,6 +1,8 @@
 <?php
   class ProductController extends Controller{
 
+    const PRODUCT = '/';
+
     public $testValues;
     public $productValues;
     public $basketValues;
@@ -13,7 +15,9 @@
         get('Product')->substituteProductDataDESC();
       // var_dump($this->testValues); // 배열로 값이 다 들어갔음!
       // return $this->render($arrayRowCount, "product", "template");  // 값 넣어야됨.
-      $products_view = $this->render(array('product' => $this->productValues), "product", "template");
+      $products_view = $this->render(array('product' => $this->productValues,
+                                           '_token'  => $this->getToken(self::PRODUCT)),
+                                    "product", "template");
       return $products_view;
     }
 
@@ -24,33 +28,48 @@
       $this->productValues = $this->_connect_model->
         get('Product')->getDetailData($p_Number);
 
-      $products_view = $this->render(array('product' => $this->productValues), "product_detail", "template");
+      $products_view = $this->render(array('product' => $this->productValues,
+                                            '_token'  => $this->getToken(self::PRODUCT)),
+                                    "product_detail", "template");
 
       return $products_view;
     }
 
     // search 로 상품 찾고 View로 값 보내기
     public function searchAction(){
+
+      $token = $this->_request->getPost('_token');
+
+
         $searchValue = "%".$this->_request->getPost('searchValue')."%";
 
         $this->productValues = $this->_connect_model->
           get('Product')->searchProductData($searchValue);
 
-          $products_view = $this->render(array('product' => $this->productValues), "product", "template");
+          $products_view = $this->render(array('product' => $this->productValues,
+                                              '_token'  => $this->getToken(self::PRODUCT)),
+                                        "product", "template");
           return $products_view;
     }
 
+/////////////////////// 관리자 관련  /////////////////////////////////////
+
     // 관리자 상품등록페이지 호출
     public function adminUpPageAction(){
-      return $this->render();
-    }
-
-    public function ccccAction(){
-      echo "test";
+      return $this->render(array('_token'  => $this->getToken(self::PRODUCT)));
     }
 
     // 관리자 삭제버튼, 정보수정 판단
     public function delORmodifyAction(){
+
+      $token = $this->_request->getPost('_token');
+
+          if (!$this->checkToken(self::PRODUCT, $token)){
+            // 로그인을 필요로하는 페이지에서 토큰을 체크  true false 반환 ,  비정상접근 일 경우 false 인데
+            // $this 앞에 !가 있어서  true로 바뀌고   아래쪽 redirect 실행.
+
+            return $this->redirect(self::PRODUCT);
+          }
 
       $Post_p_Number = $this->_request->getPost('Post_pNumber');
       $Post_p_Name = $this->_request->getPost('Post_pName');
@@ -71,7 +90,9 @@
 
       if($this->_request->getPost('submit') == "정보수정"){
 
-        $products_view = $this->render(array('beforeModify' => $modifyValues), "adminModifyPage", "template");
+        $products_view = $this->render(array('beforeModify' => $modifyValues,
+                                             '_token'  => $this->getToken(self::PRODUCT)),
+                                      "adminModifyPage", "template");
         return $products_view;
 
 
@@ -94,6 +115,18 @@
 
     // 관리자 상품정보수정
     public function adminModifyAction(){
+      $flag = "t";
+      // 토큰 확인
+      $token = $this->_request->getPost('_token');
+
+          if (!$this->checkToken(self::PRODUCT, $token)){
+            // 로그인을 필요로하는 페이지에서 토큰을 체크  true false 반환 ,  비정상접근 일 경우 false 인데
+            // $this 앞에 !가 있어서  true로 바뀌고   아래쪽 redirect 실행.
+
+            return $this->redirect(self::PRODUCT );
+          }
+
+
       $Post_p_Number = $this->_request->getPost('Post_pNumber');
       $Post_p_Name = $this->_request->getPost('p_name');
       $Post_p_Price = $this->_request->getPost('p_price');
@@ -113,35 +146,41 @@
       for($i = 1; $i < 8; $i++){
         if($i != 6){
           if($modifyValues[$i] == ""){
+            $flag = "f";
             // return "false";
             echo "<script>alert('입력되지 않은 값이 있습니다.')</script>";
             echo "<script> location.replace('/index.php'); </script>";
+
           }
         }
       }
 
       if(!is_numeric($modifyValues[2])){
+        $flag = "f";
         echo "<script>alert('가격 입력란은 숫자로 입력해주세요.')</script>";
         echo "<script> location.replace('/index.php'); </script>";
       }
 
       if(!is_numeric($modifyValues[5])){
+        $flag = "f";
         echo "<script>alert('갯수 입력란은 숫자로 입력해주세요.')</script>";
         echo "<script> location.replace('/index.php'); </script>";
       }
 
-      $modifyProduct = $this->_connect_model->
-        get('Product')->adminModify($modifyValues);
-
+      if($flag == "t"){
+        $modifyProduct = $this->_connect_model->
+          get('Product')->adminModify($modifyValues);
 
         echo "<script>alert('상품정보 수정 완료')</script>";
         echo "<script> location.replace('/index.php'); </script>";
+      }
 
 
     }
 
     // 관리자 상품등록하기
     public function adminUploadProductAction(){
+      $flag = "t";
       $up_p_name = $this->_request->getPost('p_name');
       $up_p_price = $this->_request->getPost('p_price');
       $up_p_comment = $this->_request->getPost('p_comment');
@@ -156,18 +195,19 @@
 
                           // var_dump($up_p_values);
 
-        for($i = 0; $i < 7; $i++){
-              if(strlen($up_p_values[$i]) == 0){
-                echo "qqqqq";
-              }
-              echo "<br>";
-            }
+        // for($i = 0; $i < 7; $i++){
+        //       if(strlen($up_p_values[$i]) == 0){
+        //         echo "qqqqq";
+        //       }
+        //       echo "<br>";
+        //     }
 
 
         for($i = 0; $i < 7; $i++){
           if($i != 5){
             if($up_p_values[$i] == ""){
               // return "false";
+              $flag = "f";
               echo "<script>alert('입력되지 않은 값이 있습니다.')</script>";
               echo "<script> location.replace('/index.php'); </script>";
             }
@@ -175,19 +215,23 @@
         }
 
         if(!is_numeric($up_p_values[1])){
+          $flag = "f";
           echo "<script>alert('가격 입력란은 숫자로 입력해주세요.')</script>";
           echo "<script> location.replace('/index.php'); </script>";
         }
 
         if(!is_numeric($up_p_values[4])){
+          $flag = "f";
           echo "<script>alert('갯수 입력란은 숫자로 입력해주세요.')</script>";
           echo "<script> location.replace('/index.php'); </script>";
         }
 
-        $this->productValues = $this->_connect_model->
-          get('Product')->adminUploadProduct($up_p_values);
-        echo "<script>alert('상품 등록 완료')</script>";
-        echo "<script> location.replace('/index.php'); </script>";
+        if($flag == "t"){
+          $this->productValues = $this->_connect_model->
+            get('Product')->adminUploadProduct($up_p_values);
+          echo "<script>alert('상품 등록 완료')</script>";
+          echo "<script> location.replace('/index.php'); </script>";
+        }
 
     }
 
@@ -256,11 +300,32 @@
 
       //  return $backPage;
 
-   }
+    }
 
+///////////////////////// 장바구니 관련 ////////////////////////////////////////
+
+    // 장바구니인지 구매하기 인지 판별하기
+    public function buyORbasketAction(){
+      // var_dump($this->_request->getPost('submit'));
+
+      $Post_amount = $this->_request->getPost('Post_amount');
+
+      if($this->_request->getPost('submit') == "장바구니"){
+        // echo "장바구니<br>";
+        echo $Post_amount;
+        $this->basketAction($Post_amount);
+      }
+
+      if ($this->_request->getPost('submit') == "구매하기"){
+        // echo "구매하기<br>";
+        // echo $Post_amount;
+        $this->buyProductAction($Post_amount);
+      }
+
+    }
 
     // 장바구니에 상품 담기,  (장바구니 존재여부 판단 및 장바구니테이블 생성)
-    public function basketAction($amount = 1){
+    public function basketAction($amount){
       // 해당 아이디에 장바구니가 존재하는지 여부확인
 
       if(!isset($_SESSION['user']['user_name'])){
@@ -270,16 +335,16 @@
         $user_name =  $_SESSION['user']['user_name'];
 
         // 현재 아이디가 장바구니를 만들었는지를 판단, 장바구니가 있으면 "t", 없으면 "f"
-        $flag = $this->_connect_model->get('Product')->flagBasket($user_name);
+        // $flag = $this->_connect_model->get('Product')->flagBasket($user_name);
 
 
-            if($flag['basket'] == "f"){
-              // 장바구니가 없다면 만든다.
-              $this->_connect_model->get('Product')->createBasket($user_name);
-
-              // 장바구니 여부값을 변경시킨다.
-              $this->_connect_model->get('Product')->modifyBasketValue($user_name);
-            }
+            // if($flag['basket'] == "f"){
+            //   // 장바구니가 없다면 만든다.
+            //   $this->_connect_model->get('Product')->createBasket($user_name);
+            //
+            //   // 장바구니 여부값을 변경시킨다.
+            //   $this->_connect_model->get('Product')->modifyBasketValue($user_name);
+            // }
               // 장바구니에 상품에 대한 정보를 담는다.
 
 
@@ -303,18 +368,19 @@
             // 로그인 중인지 검사
       if(isset($_SESSION['user']['user_name'])){
         $user_name =  $_SESSION['user']['user_name'];
-        $flag = $this->_connect_model->get('Product')->flagBasket($user_name);
+        // $flag = $this->_connect_model->get('Product')->flagBasket($user_name);
 
             // 해당 아이디가 장바구니 값 있는지 검사
-        if($flag['basket'] == "t" ){
+        // if($flag['basket'] == "t" ){
           $valuesRow = $this->_connect_model->get('Product')->showBasket($user_name);
           $rowCount = count($valuesRow);
 
-            if(isset($_SESSION['user']['user_name']) && $flag['basket'] == "f" || $rowCount == 0 ){
+            // if(isset($_SESSION['user']['user_name']) && $flag['basket'] == "f" || $rowCount == 0 ){
+            if(isset($_SESSION['user']['user_name']) &&  $rowCount == 0 ){
               echo "<script>alert('장바구니 목록이 없습니다.')</script>";
               echo "<script>location.replace('/product/product')</script>";
             }
-        }
+        // }
           $user_name =  $_SESSION['user']['user_name'];
 
           // 장바구니테이블의   상품값들을 변수로 저장
@@ -349,43 +415,6 @@
 
     }
 
-    // 장바구니인지 구매하기 인지 판별하기
-    public function buyORbasketAction(){
-      // var_dump($this->_request->getPost('submit'));
-
-      $Post_amount = $this->_request->getPost('Post_amount');
-
-      if($this->_request->getPost('submit') == "장바구니"){
-        // echo "장바구니<br>";
-        echo $Post_amount;
-        $this->basketAction($Post_amount);
-      }
-
-      if ($this->_request->getPost('submit') == "구매하기"){
-        // echo "구매하기<br>";
-        // echo $Post_amount;
-        $this->buyProductAction($Post_amount);
-      }
-
-    }
-
-
-    // 구매하기
-    public function buyProductAction($Post_amount){
-      $productName   = $this->_request->getPost('Post_pName');
-      $productNumber = $this->_request->getPost('Post_pNumber');
-
-      $productValues = $this->_connect_model->get('Product')->buyPoduct($productName, $productNumber, $Post_amount);
-
-      if($productValues == "false"){
-        echo "<script>alert('<$productName>는(은) 재고가 없습니다.');</script>";
-        echo "<script> history.go(-1); </script>";
-      } else {
-        echo "<script>alert('$productName 를(을) 구매했습니다.')</script>";
-        echo "<script> history.go(-1); </script>";
-      }
-    }
-
     // 장바구니 내에서 구매하기 클릭
     public function buyProduct_in_BasketAction(){
       $user_name =  $_SESSION['user']['user_name'];
@@ -407,16 +436,123 @@
 
     }
 
-    // 회원탈퇴시 장바구니 삭제
+    // 회원탈퇴시 장바구니테이블 삭제
     public function deleteUserBasketAction($user_name){
       $this->_connect_model->get('Product')->deleteUserBasket($user_name);
 
     }
 
 
+///////////////////////// 구매 관련 /////////////////////////////////////
+
+    // 구매하기
+    public function buyProductAction($Post_amount){
+      $productName   = $this->_request->getPost('Post_pName');
+      $productNumber = $this->_request->getPost('Post_pNumber');
+
+      $productValues = $this->_connect_model->get('Product')->buyPoduct($productName, $productNumber, $Post_amount);
+
+      if($productValues == "false"){
+        echo "<script>alert('<$productName>는(은) 재고가 없습니다.');</script>";
+        echo "<script> history.go(-1); </script>";
+      } else {
+        $this->buylistAction($Post_amount);
+        echo "<script>alert('$productName 를(을) 구매했습니다.')</script>";
+        echo "<script> history.go(-1); </script>";
+      }
+    }
+
+    // 구매이력 내용 보여주기
+    public function showBuyListAction(){
+              // 로그인 중인지 검사
+        if(isset($_SESSION['user']['user_name'])){
+          $user_name =  $_SESSION['user']['user_name'];
+          // $flag = $this->_connect_model->get('Product')->flagBasket($user_name);
+
+              // 해당 아이디가 장바구니 값 있는지 검사
+          // if($flag['basket'] == "t" ){
+            $valuesRow = $this->_connect_model->get('Product')->showBuyList($user_name);
+            $rowCount = count($valuesRow);
+
+              // if(isset($_SESSION['user']['user_name']) && $flag['basket'] == "f" || $rowCount == 0 ){
+              if(isset($_SESSION['user']['user_name']) &&  $rowCount == 0 ){
+                echo "<script>alert('구매이력이 없습니다.')</script>";
+                echo "<script>location.replace('/product/product')</script>";
+              }
+          // }
+            $user_name =  $_SESSION['user']['user_name'];
+
+            // 장바구니테이블의   상품값들을 변수로 저장
+            $this->buyListValues = $this->_connect_model->
+                  get('Product')->showBuyList($user_name);
+
+            $products_view = $this->render(array('buylist' => $this->buyListValues,
+                                                 'product' => $this->productValues), "showBuyList", "template");
+            return $products_view;
+
+        } else{
+                echo "<script>alert('로그인 후 이용해주세요.')</script>";
+                echo "<script>location.replace('/account/signin')</script>";
+        }
+    }
+
+    // 구매이력에 추가
+    public function buylistAction($amount = 1){
+      // 해당 아이디에 장바구니가 존재하는지 여부확인
+
+      if(!isset($_SESSION['user']['user_name'])){
+        echo "<script>alert('로그인 후 이용해주세요.')</script>";
+        echo "<script> history.go(-1); </script>";
+      } else{
+        $user_name =  $_SESSION['user']['user_name'];
+
+        // 현재 아이디가 장바구니를 만들었는지를 판단, 장바구니가 있으면 "t", 없으면 "f"
+        // $flag = $this->_connect_model->get('Product')->flagBasket($user_name);
 
 
+            // if($flag['basket'] == "f"){
+            //   // 장바구니가 없다면 만든다.
+            //   $this->_connect_model->get('Product')->createBasket($user_name);
+            //
+            //   // 장바구니 여부값을 변경시킨다.
+            //   $this->_connect_model->get('Product')->modifyBasketValue($user_name);
+            // }
+              // 장바구니에 상품에 대한 정보를 담는다.
 
-/////
+
+              $insert = $this->_connect_model->get('Product')->insertIntoBuyList($user_name, $amount);
+
+              if($insert == "false"){
+                echo "<script> alert('재고량이 부족합니다.');</script>";
+                echo "<script> history.go(-1); </script>";
+              } else{
+                echo "<script> history.go(-1); </script>";
+              }
+
+
+      } // 로그인 판단 if_else end
+    }
+
+    // 구매이력 지우기
+    public function deleteBuyListAction(){
+
+      $user_name_buylist =  $_SESSION['user']['user_name']."_buylist";
+
+      $pnum = $this->_request->getPost('hidden_p_Number');
+      $bnum = $this->_request->getPost('hidden_b_Number');
+
+      $this->_connect_model->get('Product')->deleteBuyList($user_name_buylist, $pnum, $bnum);
+
+      echo "<script>alert('구매이력에서 삭제했습니다.')</script>";
+      echo "<script> history.go(-1); </script>";
+
+    }
+
+    // 회원탈퇴시 구매이력테이블 삭제  deleteUserBuyList
+    public function deleteUserBuyListAction($user_name){
+      $this->_connect_model->get('Product')->deleteUserBuyList($user_name);
+
+    }
+
   }
  ?>

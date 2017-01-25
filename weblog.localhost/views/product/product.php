@@ -41,7 +41,7 @@
       <table border="solid white 5px" style="width:350px" >
         <tr>
           <td>
-            
+
               <a href='<?php echo $base_url; ?>/product/productdetail?number=<?php echo $product[$i]['p_Number']; ?>'>
                 <img width="200px" height="200px" src='/img/<?php echo $product[$i]['p_Imgname'];  ?>' >
                 <input type="hidden" name="Post_pNumber" value="<?php  echo $product[$i]['p_Number']; ?>">
@@ -54,6 +54,7 @@
                 <input type="hidden" name="Post_pDetail" value="<?php  echo $product[$i]['p_detail']; ?>">
                 <input type="hidden" name="rowCount" value="<?php  echo $this->rowCount; ?>">
                 <input type="hidden" name="Post_amount" value="1">
+                <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
                 <input type="hidden" name="row" value="<?php echo $this->productValuesArray; ?>">
 
               </a>
@@ -84,6 +85,7 @@
           <td>
               <input type="hidden" name="Post_pName" value="<?php  echo $product[$i]['p_Name']; ?>">
               <input type="hidden" name="Post_pNumber" value="<?php  echo $product[$i]['p_Number']; ?>">
+              <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
               <input type="submit" name="submit" value="구매하기">
             </form>
 
@@ -105,6 +107,7 @@
               <input type="hidden" name="Post_pAmount" value="<?php  echo $product[$i]['p_Amount']; ?>">
               <input type="hidden" name="Post_pImgname" value="<?php  echo $product[$i]['p_Imgname']; ?>">
               <input type="hidden" name="Post_pDetail" value="<?php  echo $product[$i]['p_detail']; ?>">
+              <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
               <td><input type="submit" name="submit" value="정보수정"></td>
               <td><input type="submit" name="submit" value="상품삭제"></td>
             </form>

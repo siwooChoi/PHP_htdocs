@@ -6,7 +6,7 @@
 
   <div class="create_textbox" id="memo_row1">
     <form  enctype="multipart/form-data" action="<?php echo $base_url; ?>/board/fileupload" method="post">
-
+      
       <div id="memo_writer"><span >▷ <?php echo $_SESSION['user']['user_name']." ( ".$_SESSION['user']['nick']." ) ";
          ?></span></div><br>
 
@@ -39,7 +39,7 @@
                 <!-- 빈 공간 -->
               </td>
               <td>
-
+                <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
                 <input class="upb1" type="submit" value="작성하기">
 
               </td>
@@ -48,6 +48,7 @@
 
           <form class="" action="<?php echo $base_url; ?>/board/contentBoard" method="post">
               <td>
+                <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
                 <input class="upb2" type="submit" value="취소">
               </td>
          </tr>

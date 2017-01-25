@@ -127,7 +127,6 @@ abstract class Controller {//추상 클래스 이므로 사용하려면 계승�
           // echo "Controller.php 에서의 변수 viewFile이 가지는 값은 : ";
           // var_dump($viewFile);     // 클릭했을 때 화면보여주는 views폴더 내의 ~~~.php 파일의 이름
           // echo "<br>";
-
     }
 
     if (is_null($template)) {
@@ -135,10 +134,6 @@ abstract class Controller {//추상 클래스 이므로 사용하려면 계승�
     }
 
     $path = $this->_controller . '/' .$viewFile;
-
-    //
-
-
     // echo "Controller.php 에서의 변수 path가 가지는 값은 : ";
     // var_dump($path);   // 상황에 따라 사용중인 컨트롤러와 관련된 ~폴더/표시중인 ~.php
     // echo "<br>";
@@ -149,8 +144,6 @@ abstract class Controller {//추상 클래스 이므로 사용하려면 계승�
     // 4> (위쪽 render()함수의 시작부분 근처의 설명에 이어서)
     //  view의 render()의 $param으로 view객체로 넘겨주게 된다.
     // 5> (View.php -> render()에 이어서)
-
-
 
     // var_dump($contents);     // 파일의 코드 자체를 읽어오는 듯 하다. string(페이지마다 다르지만 큰 수);
     return $contents;

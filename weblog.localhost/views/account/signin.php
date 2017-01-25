@@ -7,12 +7,9 @@
    <!-- AccountController의 signupAction 메소드 -->
 <!-- </p> -->
 
-<form action="<?php print $base_url; ?>/account/authenticate"
-      method="post">
+<form action="<?php print $base_url; ?>/account/authenticate" method="post">
       <!-- AccountController의 authenticateAction 메소드 -->
-  <input type="hidden"
-         name="_token"
-         value="<?php print $this->escape($_token); ?>" />
+  <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>" />
 
   <?php if (isset($errors) && count($errors) > 0): ?>
     <?php print $this->render('errors', array('errors' => $errors)); ?>

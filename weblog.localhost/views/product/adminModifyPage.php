@@ -47,10 +47,12 @@
 
               <br>
               <input type="hidden" name="Post_pNumber" value="<?php  echo $beforeModify[0]; ?>">
+              <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
               <input class="upload_button" type="submit" value="등록하기">
             </form>
 
             <form action="<?php echo $base_url; ?>/product/product" method="post">
+              <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
               <input class="cancel_button" type="submit" value="돌아가기">
           </td>
         </tr>

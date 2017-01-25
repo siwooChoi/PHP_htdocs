@@ -4,6 +4,7 @@
  <p style="text-align:center"> 글 수정</p>
   <div class="memo_row_modi">
     <form  enctype="multipart/form-data" action="<?php echo $base_url;?>/board/modifyUploadBoard?page=<?php echo $content[0]['id']?>" method="post" >
+      <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
       <div id="memo_writer"><span >▷<?php echo $content[0]['user_name']." ( ".$content[0]['user_nick']." )"; ?> </span></div><br>
       글 번호 : <?php echo $content[0]['id'];?><br>
       글 제목 : <input style="width:500px" type="text" name="modify_message_name" value="<?php echo $content[0]['message_name'];?>" ><br><br>
@@ -16,6 +17,7 @@
             <tr>
                 <td>
                   <form>
+                    <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
                     <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                     <input class="myfile" type="file" name="myfile" placeholder="Photo">
                   </form>
@@ -34,6 +36,7 @@
 
           <form class="" action="<?php echo $base_url;?>/board/contentBoard" method="post">
               <td>
+                <input type="hidden" name="_token" value="<?php print $this->escape($_token); ?>">
                 <input class="modi_can" type="submit" value="취소">
               </td>
          </tr>

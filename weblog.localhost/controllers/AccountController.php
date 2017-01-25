@@ -5,13 +5,30 @@ class AccountController extends Controller {
    //login에 필요한 action정의
   const SIGNUP = 'account/signup';
   const SIGNIN = 'account/signin';
-  const FOLLOW = 'account/follow';
+  // const FOLLOW = 'account/follow';
 
+  // test //
   public function alertAction(){
-    // print "<script> alert('로그인 후 이용하세요.') </script>";
+    print "<script> alert('test') </script>";
     $this->redirect('/account');
   }
 
+  // 인덱스
+  public function indexAction() {
+    // /views/account/index.php
+    $user = $this->_session->get('user');
+    $followingUsers = $this->_connect_model
+                           ->get('User')
+                           ->getFollowingUser($user['id']);
+
+    $index_view = $this->render(array(
+      'user'           => $user,
+      'followingUsers' => $followingUsers,
+    ));
+    return $index_view;
+  }
+
+  // 회원가입
   public function signupAction() {
     if ($this->_session->isAuthenticated()) {
       // 여기서는 $this->_session 이 보이지 않는다.
@@ -27,12 +44,13 @@ class AccountController extends Controller {
         'email'     => '',
         'basket'    => '',
         '_token'    => $this->getToken(self::SIGNUP),
-//Controller클래스의 CSRF(Cross-site request forgery,사이트간 요청위조) 대책용 Token을생성
-//http://namu.wiki/w/CSRF
+     //Controller클래스의 CSRF(Cross-site request forgery,사이트간 요청위조) 대책용 Token을생성
+   //http://namu.wiki/w/CSRF
     ));
     return $signup_view;
   }
 
+  // 회원가입 체크
   public function registerAction() {
       //signup.php내의 form태그 action에서의 설정
       //1>POST 전송박식으로 전달 받은 데이터에 대한 체크
@@ -47,8 +65,8 @@ class AccountController extends Controller {
       //2>CSRF대책의 Token 체크
       $token = $this->_request->getPost('_token');// view의 hidden 으로 넘어오는 값
       if (!$this->checkToken(self::SIGNUP, $token)){
-  // 로그인을 필요로하는 페이지에서 토큰을 체크  true false 반환 ,  비정상접근 일 경우 false 인데
-  // $this 앞에 !가 있어서  true로 바뀌고   아래쪽 redirect 실행.
+   // 로그인을 필요로하는 페이지에서 토큰을 체크  true false 반환 ,  비정상접근 일 경우 false 인데
+   // $this 앞에 !가 있어서  true로 바뀌고   아래쪽 redirect 실행.
 
         return $this->redirect('/' . self::SIGNUP);
       }
@@ -132,6 +150,20 @@ class AccountController extends Controller {
              ->get('User')
              ->insert($user_name, $password, $nick, $tel, $email );
 
+         // 아이디를 생성하면 장바구니테이블 자동생성
+       $this->_connect_model
+            ->get('product')
+            ->createBasket($user_name);
+
+        //  아이디를 생성하면 구매이력테이블 자동생성  createBuyList
+        $this->_connect_model
+             ->get('product')
+             ->createBuyList($user_name);
+
+       $this->_connect_model
+            ->get('product')
+            ->createBuyList($user_name);
+
              //세션ID재생성
         $this->_session
              ->setAuthenticateStaus(true);
@@ -160,27 +192,7 @@ class AccountController extends Controller {
 
   } // registerAction의 끝나는 부분
 
-
-
-  public function indexAction() {
-    // /views/account/index.php
-    $user = $this->_session->get('user');
-    $followingUsers = $this->_connect_model
-                           ->get('User')
-                           ->getFollowingUser($user['id']);
-
-    $index_view = $this->render(array(
-      'user'           => $user,
-      'followingUsers' => $followingUsers,
-    ));
-    return $index_view;
-  }
-
-  public function tAction(){
-    return $this->render();
-    // echo "aa";
-  }
-
+  // 로그인
   public function signinAction() {
     // /views/account/signin.php
     if ($this->_session->isAuthenticated()) {
@@ -196,31 +208,7 @@ class AccountController extends Controller {
     return $signin_view;
 	}
 
-  // 회원탈퇴하기
-  public function deleteIdAction(){
-    $user_number = $_SESSION['user']['id'];
-    $user_name   = $_SESSION['user']['user_name'];
-    $flag = $this->_connect_model->get('Product')->flagBasket($user_name);
-    $this->_connect_model->get('User')->deleteId($user_number);
-
-    // 회원 장바구니 존재여부 판단
-    if($flag['basket'] == "t"){
-      // echo $flag['basket'];
-      $this->_connect_model->get('Product')->deleteUserBasket($user_name);
-    }
-
-
-    session_destroy();
-    echo "<script>alert('회원탈퇴 하였습니다.')</script>";
-    echo "<script> location.replace('/index.php'); </script>";
-  }
-
-
-  public function testAction(){
-
-
-  }
-
+  // 로그인 체크
   public function authenticateAction() {
      if (!$this->_request->isPost()) {
       $this->httpNotFound();
@@ -231,16 +219,12 @@ class AccountController extends Controller {
 
     $token = $this->_request
                   ->getPost('_token');
-    if (!$this->checkToken(self::SIGNIN,
-                           $token)
-    ){
+    if (!$this->checkToken(self::SIGNIN, $token)){
       return $this->redirect('/' . self::SIGNIN);
     }
 
-    $user_name = $this->_request
-                      ->getPost('user_name');
-    $password  = $this->_request
-                      ->getPost('password');
+    $user_name = $this->_request ->getPost('user_name');
+    $password  = $this->_request ->getPost('password');
 
     $errors = array();
     if (!strlen($user_name)) {
@@ -252,24 +236,20 @@ class AccountController extends Controller {
     }
 
     if (count($errors) === 0) {
-			$user = $this->_connect_model
-                   ->get('User')  // get('User') --> UserModel.php 를 의미.
+			$user = $this->_connect_model->get('User')  // get('User') --> UserModel.php 를 의미.
                                   // get('Following') --> FollowingModel.php,
                                   // BlogController의 get('Status') 는 StatusModel.php 를 의미
                    ->getUserRecord($user_name);
 
-      if (!$user
-          || (!password_verify($password, $user['password']))
-  // password_hash() : _문자열을 암호화_    와
-  // password_verify() : _암호화된 패스워드를 다시 정상으로_
-  //                     는 쌍으로 사용한다.
+      if (!$user || (!password_verify($password, $user['password']))
+   // password_hash() : _문자열을 암호화_    와
+   // password_verify() : _암호화된 패스워드를 다시 정상으로_
+   //                     는 쌍으로 사용한다.
 			){
  	     	$errors[] = '로그인 실패';
       } else {
-        $this->_session
-             ->setAuthenticateStaus(true);
-        $this->_session
-             ->set('user', $user);
+        $this->_session->setAuthenticateStaus(true);
+        $this->_session->set('user', $user);
 
         // 로그인 후 바로 보여지는 경로
         $result = $this->redirect('/product/product');
@@ -285,45 +265,58 @@ class AccountController extends Controller {
     ), 'signin');
   }
 
+  // 로그아웃
 	public function signoutAction(){
-		$this->_session
-         ->clear();
-		$this->_session
-         ->setAuthenticateStaus(false);
+		$this->_session->clear();
+		$this->_session->setAuthenticateStaus(false);
 		return $this->redirect('/' . self::SIGNIN);
 	}
 
+  // 회원탈퇴하기
+  public function deleteIdAction(){
+    $user_number = $_SESSION['user']['id'];
+    $user_name   = $_SESSION['user']['user_name'];
+    $flag = $this->_connect_model->get('Product')->flagBasket($user_name);
+    $this->_connect_model->get('User')->deleteId($user_number);
+
+    // 회원 장바구니 존재여부 판단
+    // if($flag['basket'] == "t"){
+      // echo $flag['basket'];
+      $this->_connect_model->get('Product')->deleteUserBasket($user_name);
+      $this->_connect_model->get('Product')->deleteUserBuyL($user_name);
+    // }
+
+    session_destroy();
+    echo "<script>alert('회원탈퇴 하였습니다.')</script>";
+    echo "<script> location.replace('/index.php'); </script>";
+  }
+
+
+  // 팔로우 //
   public function followAction() {
     if (!$this->_request->isPost()) {
       $this->httpNotFound();
     }
 
-    $follow_user_name = $this->_request
-                             ->getPost('follow_user_name');
+    $follow_user_name = $this->_request->getPost('follow_user_name');
     if (!$follow_user_name){
       $this->httpNotFound();
     }
 
     $token = $this->_request->getPost('_token');
 
-    if (
-      !$this->checkToken(self::FOLLOW, $token)
-    ){
+    if (!$this->checkToken(self::FOLLOW, $token)){
       return $this->redirect('/user/' . $follow_user_name);
     }
 
-    $follow_user = $this->_connect_model
-                        ->get('User')
-                        ->getUserRecord($follow_user_name);
+    $follow_user = $this->_connect_model->get('User')->getUserRecord($follow_user_name);
     if (!$follow_user) {
         $this->httpNotFound();
     }
 
-    $user = $this->_session
-                 ->get('user');
+    $user = $this->_session->get('user');
 
-    $followTblConnection = $this->_connect_model
-                                ->get('Following');
+    $followTblConnection = $this->_connect_model->get('Following');
 
     if ($user['id'] !== $follow_user['id']
         && !$followTblConnection->isFollowedUser(

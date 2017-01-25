@@ -53,7 +53,11 @@ Weblog
 						?><a href="<?php print $base_url; ?>/product/showBasket">
 							<div class='menulist'> 장바구니  </div>
 						</a>
-					
+
+						<a href="<?php print $base_url; ?>/product/showBuyList">
+							<div class='menulist'> 구매이력  </div>
+						</a>
+
 						<?php
 					}?>
 					<!-- <a href="<?php print $base_url; ?>/test/test1">
